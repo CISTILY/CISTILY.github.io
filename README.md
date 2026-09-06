@@ -2,6 +2,8 @@
 
 Website cá nhân tiếng Việt, dùng React + TypeScript, xuất thành website tĩnh để chạy trên GitHub Pages hoặc Sites. Có giới thiệu, định hướng, học vấn, project và bài viết; hỗ trợ điện thoại, bàn phím và chế độ giảm chuyển động.
 
+Xem [hướng dẫn tùy chỉnh chi tiết](CUSTOMIZATION.md) để đổi nội dung cá nhân, học vấn, project, blog, màu sắc, bố cục, ảnh đại diện và thông tin website.
+
 ## Chọn project để đưa lên
 
 Mở `content/portfolio.ts`, tìm danh sách `projects`:

@@ -1,0 +1,19 @@
+{
+  "name": "CISTILY",
+  "role": "",
+  "affiliation": "",
+  "location": "",
+  "avatar": "",
+  "avatarAlt": "",
+  "email": "",
+  "cv": "",
+  "description": "Personal website · Research, gallery & posts.",
+  "socials": [
+    { "label": "GitHub", "url": "https://github.com/CISTILY" }
+  ],
+  "pages": {
+    "research": { "title": "Research", "description": "Các đề tài, dự án và hướng nghiên cứu." },
+    "gallery": { "title": "Gallery", "description": "Những hình ảnh và câu chuyện được lưu lại." },
+    "posts": { "title": "Posts", "description": "Ghi chép, ý tưởng và những điều học được." }
+  }
+}

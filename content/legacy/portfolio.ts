@@ -1,4 +1,6 @@
-// published: true = hiện, false = ẩn. Thứ tự trong mảng là thứ tự trên website.
+// Lưu lại dữ liệu phiên bản trước; website mới KHÔNG đọc file này.
+// Chỉnh hồ sơ trong content/site.json và các file content/about/*.md.
+// Thêm nội dung trong content/research, content/gallery hoặc content/posts.
 export const profile = {
   name: 'CISTILY',
   tagline: 'Không ngừng tò mò. Không ngừng xây dựng.',
