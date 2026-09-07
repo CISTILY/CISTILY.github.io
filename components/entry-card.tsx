@@ -1,16 +1,18 @@
 import { ArrowRight, Images } from 'lucide-react';
 import { formatDate, type Entry } from '@/lib/content';
+import { getUI } from '@/lib/i18n';
+import { localePath, type Locale } from '@/lib/locale';
 
-export function EntryCard({ entry }: { entry: Entry }) {
+export function EntryCard({ entry, locale }: { entry: Entry; locale: Locale }) {
+  const ui = getUI(locale);
   const isGallery = entry.collection === 'gallery';
-  const label = isGallery
-    ? 'Xem album'
-    : entry.collection === 'posts'
-      ? 'Đọc bài viết'
-      : 'Xem nghiên cứu';
+  const label = ui.actions[entry.collection];
   return (
     <article className={`entry-card ${entry.collection}-card`}>
-      <a className="entry-link" href={`/${entry.collection}/${entry.slug}/`}>
+      <a
+        className="entry-link"
+        href={localePath(locale, `/${entry.collection}/${entry.slug}/`)}
+      >
         {(entry.cover || isGallery) && (
           <div className="entry-cover">
             {entry.cover ? (
@@ -24,22 +26,29 @@ export function EntryCard({ entry }: { entry: Entry }) {
             ) : (
               <div className="cover-placeholder" aria-hidden="true">
                 <Images size={35} strokeWidth={1.1} />
-                <span>PHOTO ALBUM</span>
+                <span>{ui.photoAlbum}</span>
               </div>
             )}
           </div>
         )}
         <div className="entry-body">
           <div className="entry-meta">
-            {entry.sample && <span className="sample-badge">Nội dung mẫu</span>}
+            {entry.sample && <span className="sample-badge">{ui.sample}</span>}
             {entry.date && (
-              <time dateTime={entry.date}>{formatDate(entry.date)}</time>
+              <time dateTime={entry.date}>
+                {formatDate(entry.date, locale)}
+              </time>
             )}
             {entry.collection === 'posts' && (
-              <span>{entry.minutes} phút đọc</span>
+              <span>
+                {entry.minutes} {ui.minuteRead}
+              </span>
             )}
             {isGallery && entry.images.length > 0 && (
-              <span>{entry.images.length} ảnh</span>
+              <span>
+                {entry.images.length}{' '}
+                {entry.images.length === 1 ? ui.photo : ui.photos}
+              </span>
             )}
           </div>
           <h2>{entry.title}</h2>

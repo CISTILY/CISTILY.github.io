@@ -7,13 +7,25 @@
   "avatarAlt": "",
   "email": "lebathanh.nv@gmail.com",
   "cv": "",
-  "description": "Personal website · Research, gallery & posts.",
+  "description": "Website cá nhân · Nghiên cứu, thư viện ảnh và bài viết.",
   "socials": [
-    { "label": "GitHub", "url": "https://github.com/CISTILY" }
+    {
+      "label": "GitHub",
+      "url": "https://github.com/CISTILY"
+    }
   ],
   "pages": {
-    "research": { "title": "Research", "description": "Các đề tài, dự án và hướng nghiên cứu." },
-    "gallery": { "title": "Gallery", "description": "Những hình ảnh và câu chuyện được lưu lại." },
-    "posts": { "title": "Posts", "description": "Ghi chép, ý tưởng và những điều học được." }
+    "research": {
+      "title": "Nghiên cứu",
+      "description": "Các đề tài, dự án và hướng nghiên cứu."
+    },
+    "gallery": {
+      "title": "Thư viện ảnh",
+      "description": "Những hình ảnh và câu chuyện được lưu lại."
+    },
+    "posts": {
+      "title": "Bài viết",
+      "description": "Ghi chép, ý tưởng và những điều học được."
+    }
   }
 }

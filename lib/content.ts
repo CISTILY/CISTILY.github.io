@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import MarkdownIt from 'markdown-it';
 import { parseDocument } from 'yaml';
+import type { Locale } from './locale';
 
 export const collections = ['research', 'gallery', 'posts'] as const;
 export type Collection = (typeof collections)[number];
@@ -174,14 +175,32 @@ export function getEntries(
 }
 export function getAbout(
   section: 'research-interests' | 'background' | 'contact',
+  locale: Locale = 'vi',
 ) {
   return renderMarkdown(
-    fs.readFileSync(path.join(root, 'about', `${section}.md`), 'utf8'),
+    fs.readFileSync(
+      path.join(
+        locale === 'en' ? path.join(root, 'en') : root,
+        'about',
+        `${section}.md`,
+      ),
+      'utf8',
+    ),
   );
 }
-export function formatDate(date: string) {
+export function getEntriesForLocale(
+  collection: Collection,
+  locale: Locale = 'vi',
+  contentRoot = root,
+) {
+  return getEntries(
+    collection,
+    locale === 'en' ? path.join(contentRoot, 'en') : contentRoot,
+  );
+}
+export function formatDate(date: string, locale: Locale = 'vi') {
   return date
-    ? new Intl.DateTimeFormat('vi-VN', {
+    ? new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'vi-VN', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',

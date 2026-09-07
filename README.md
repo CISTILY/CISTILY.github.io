@@ -4,6 +4,8 @@ Website cá nhân lấy cảm hứng bố cục từ [lexi-jones.github.io](http
 
 ## Tự cập nhật mà không sửa code giao diện
 
+Website hỗ trợ **VI / EN**: bản Việt ở `/`, bản Anh ở `/en/`. Xem [BILINGUAL.md](BILINGUAL.md) để chỉnh hồ sơ, nhãn giao diện và các cặp Markdown theo ngôn ngữ. Các đường dẫn nội dung bên dưới là bản Việt; bản Anh nằm trong `content/en/` với cùng cấu trúc.
+
 | Nội dung | File/thư mục cần sửa |
 | --- | --- |
 | Tên, ảnh đại diện, chức danh, nơi làm việc, liên kết | [`content/site.json`](content/site.json) |
@@ -58,10 +60,11 @@ Bản Sites được cập nhật bằng một lần lưu và triển khai phiê
 
 ## Cấu trúc giao diện
 
-- `app/layout.tsx`: khung chung, thanh menu, hồ sơ, footer.
-- `app/page.tsx`: About.
-- `app/[collection]/page.tsx`: trang danh sách Research, Gallery, Posts.
-- `app/[collection]/[slug]/page.tsx`: trang chi tiết tự sinh từ Markdown.
+- `components/site-document.tsx`: khung chung và HTML theo ngôn ngữ.
+- `components/content-pages.tsx`: giao diện About, danh sách và trang chi tiết.
+- `app/(vi)/`: các route tiếng Việt, giữ URL hiện tại.
+- `app/(en)/en/`: các route tiếng Anh dưới `/en/`.
+- `content/ui.vi.json`, `content/ui.en.json`: nhãn giao diện có thể chỉnh sửa.
 - `components/entry-card.tsx`: card tóm tắt.
 - `lib/content.ts`: đọc, kiểm tra và hiển thị nội dung Markdown.
 - `app/globals.css`: màu sắc, typography, bố cục desktop/mobile.

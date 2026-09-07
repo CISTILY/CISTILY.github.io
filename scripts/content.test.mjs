@@ -8,7 +8,10 @@ import {
   getEntries,
   renderMarkdown,
   safeLink,
+  getEntriesForLocale,
+  formatDate,
 } from '../lib/content.ts';
+import { localePath, languageTarget } from '../lib/locale.ts';
 
 const entry = (metadata = '', body = '## Nội dung\n\nMột đoạn **in đậm**.') =>
   `---\ntitle: "Ví dụ"\nsummary: "Tóm tắt"\npublished: true\n${metadata}\n---\n${body}`;
@@ -118,6 +121,28 @@ test('new Markdown files appear automatically, templates/drafts stay excluded, o
     getEntries('posts', directory).map((item) => item.slug),
     ['newer', 'older'],
   );
+  fs.mkdirSync(path.join(directory, 'en', 'posts'), { recursive: true });
+  fs.writeFileSync(
+    path.join(directory, 'en', 'posts', 'newer.md'),
+    entry().replace('title: "Ví dụ"', 'title: "English title"'),
+  );
+  assert.deepEqual(
+    getEntriesForLocale('posts', 'en', directory).map((item) => [
+      item.slug,
+      item.title,
+    ]),
+    [['newer', 'English title']],
+  );
+  assert.equal(getEntriesForLocale('posts', 'vi', directory).length, 2);
+  fs.writeFileSync(
+    path.join(directory, 'en', 'posts', 'newer.md'),
+    entry().replace('published: true', 'published: false'),
+  );
+  assert.equal(
+    getEntriesForLocale('posts', 'en', directory).length,
+    0,
+    'An English draft must not fall back to a published Vietnamese entry',
+  );
 });
 test('profile links allow supported URLs and reject executable or protocol-relative links', () => {
   assert.equal(safeLink('javascript:alert(1)'), '');
@@ -126,5 +151,56 @@ test('profile links allow supported URLs and reject executable or protocol-relat
   assert.equal(
     safeLink('https://github.com/CISTILY'),
     'https://github.com/CISTILY',
+  );
+});
+
+test('language switching preserves a translated detail page and falls back safely when translation is missing', () => {
+  const paths = [
+    '/',
+    '/en/',
+    '/posts/',
+    '/en/posts/',
+    '/posts/shared/',
+    '/en/posts/shared/',
+  ];
+  assert.deepEqual(languageTarget('/posts/shared/', 'en', paths), {
+    href: '/en/posts/shared/',
+    missing: false,
+  });
+  assert.deepEqual(languageTarget('/en/posts/shared', 'vi', paths), {
+    href: '/posts/shared/',
+    missing: false,
+  });
+  assert.deepEqual(languageTarget('/posts/vi-only/', 'en', paths), {
+    href: '/en/posts/',
+    missing: true,
+  });
+  assert.deepEqual(languageTarget('/en/posts/en-only/', 'vi', paths), {
+    href: '/posts/',
+    missing: true,
+  });
+  assert.deepEqual(languageTarget('/unknown/', 'en', paths), {
+    href: '/en/',
+    missing: true,
+  });
+  assert.equal(localePath('vi', '/en/research/'), '/research/');
+  assert.equal(localePath('en', '/en/research/'), '/en/research/');
+  assert.equal(localePath('en', '/english-topic/'), '/en/english-topic/');
+});
+test('English and Vietnamese interface dictionaries expose the same editable keys and localized dates differ', () => {
+  const leaves = (object, prefix = '') =>
+    Object.entries(object)
+      .flatMap(([key, value]) =>
+        typeof value === 'object'
+          ? leaves(value, prefix + key + '.')
+          : [prefix + key],
+      )
+      .sort();
+  const vi = JSON.parse(fs.readFileSync('content/ui.vi.json', 'utf8'));
+  const en = JSON.parse(fs.readFileSync('content/ui.en.json', 'utf8'));
+  assert.deepEqual(leaves(vi), leaves(en));
+  assert.notEqual(
+    formatDate('2026-09-07', 'vi'),
+    formatDate('2026-09-07', 'en'),
   );
 });

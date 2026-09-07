@@ -1,0 +1,31 @@
+{
+  "name": "Nguyễn Văn Lê Bá Thành",
+  "role": "",
+  "affiliation": "University of Science, VNU-HCM",
+  "location": "Ho Chi Minh City, Vietnam",
+  "avatar": "",
+  "avatarAlt": "",
+  "email": "lebathanh.nv@gmail.com",
+  "cv": "",
+  "description": "Personal website · Research, gallery & posts.",
+  "socials": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/CISTILY"
+    }
+  ],
+  "pages": {
+    "research": {
+      "title": "Research",
+      "description": "Research projects, questions and explorations."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "Images and the stories behind them."
+    },
+    "posts": {
+      "title": "Posts",
+      "description": "Notes, ideas and lessons learned."
+    }
+  }
+}

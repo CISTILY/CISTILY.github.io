@@ -1,18 +1,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
-const [collection, slug, extra] = process.argv.slice(2);
+const [collection, slug, locale = 'vi', extra] = process.argv.slice(2);
 if (
   !['research', 'gallery', 'posts'].includes(collection) ||
   !slug ||
   !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) ||
+  !['vi', 'en'].includes(locale) ||
   extra
 ) {
   console.error(
-    'Dùng: npm run new:research -- ten-muc (hoặc new:gallery / new:post). Tên chỉ gồm chữ thường không dấu, số và dấu gạch ngang.',
+    'Dùng: npm run new:research -- ten-muc [vi|en] (hoặc new:gallery / new:post). Tên chỉ gồm chữ thường không dấu, số và dấu gạch ngang.',
   );
   process.exit(1);
 }
-const directory = path.resolve('content', collection);
+const directory = path.resolve(
+  'content',
+  ...(locale === 'en' ? ['en'] : []),
+  collection,
+);
 const target = path.join(directory, `${slug}.md`);
 try {
   fs.writeFileSync(

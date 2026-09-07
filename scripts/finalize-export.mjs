@@ -36,6 +36,11 @@ for (const route of routes) {
 for (const route of routes) {
   const source = route === '/' ? 'index.html' : route.slice(1) + '.html';
   const html = fs.readFileSync(withinOutput(source), 'utf8');
+  if (route !== '/404') {
+    const locale = /^\/en(?:\/|$)/.test(route) ? 'en' : 'vi';
+    if (!html.includes(`<html lang="${locale}"`))
+      throw new Error(`Wrong HTML language for ${route}`);
+  }
   for (const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     const href = match[1].replaceAll('&amp;', '&');
     if (!href || href.startsWith('#')) continue;

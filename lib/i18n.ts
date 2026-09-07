@@ -1,0 +1,11 @@
+import vi from '@/content/ui.vi.json';
+import en from '@/content/ui.en.json';
+import siteVi from '@/content/site.json';
+import siteEn from '@/content/en/site.json';
+import type { Locale } from './locale';
+export type UI = typeof vi;
+export type Site = typeof siteVi;
+const messages: Record<Locale, UI> = { vi, en };
+const sites: Record<Locale, Site> = { vi: siteVi, en: siteEn };
+export const getUI = (locale: Locale) => messages[locale];
+export const getSite = (locale: Locale) => sites[locale];

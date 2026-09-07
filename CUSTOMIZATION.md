@@ -2,6 +2,8 @@
 
 Website có bốn trang **About, Research, Gallery, Posts**, với hồ sơ cá nhân ở bên trái. Bạn cập nhật bằng file nội dung; không cần sửa React/TypeScript để thêm nghiên cứu, album hay bài viết.
 
+**Hai ngôn ngữ:** các đường dẫn trong hướng dẫn này là bản Việt. Bản Anh dùng cùng cấu trúc bên trong `content/en/`. Xem [BILINGUAL.md](BILINGUAL.md) để ghép cặp bài, dùng nút VI/EN và chỉnh hồ sơ/nhãn giao diện riêng cho từng phiên bản.
+
 ## 1. Bắt đầu từ đâu?
 
 | Bạn muốn làm gì? | Nơi thực hiện |
@@ -359,9 +361,9 @@ Việc cập nhật nội dung thường ngày không cần phần này.
 | Kích thước ảnh đại diện | `.profile-photo`, `.profile-initials` và các quy tắc mobile |
 | Số cột card | `.collection-grid` và các khối `@media` |
 | Nền bìa Gallery khi chưa có ảnh | `.entry-cover` |
-| Menu About/Research/Gallery/Posts | `components/site-nav.tsx` |
-| Tiêu đề Research Interests/Background/Contact | `app/page.tsx` |
-| Chữ cố định trong footer | `app/layout.tsx` |
+| Nhãn menu About/Research/Gallery/Posts | `nav` trong `content/ui.vi.json` hoặc `content/ui.en.json` |
+| Tiêu đề Research Interests/Background/Contact | `sections` trong các file UI theo ngôn ngữ |
+| Khung footer | `components/site-document.tsx`; nhãn dùng các file UI |
 | Favicon | `public/favicon.svg` |
 
 Màu chính hiện tại:

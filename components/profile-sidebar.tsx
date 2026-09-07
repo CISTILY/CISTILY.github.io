@@ -1,10 +1,13 @@
 import { MapPin, Mail, FileText, ArrowUpRight, Building2 } from 'lucide-react';
-import site from '@/content/site.json';
+import { getSite, getUI } from '@/lib/i18n';
+import { localePath, type Locale } from '@/lib/locale';
 import { safeLink } from '@/lib/content';
-export function ProfileSidebar() {
+export function ProfileSidebar({ locale }: { locale: Locale }) {
+  const site = getSite(locale),
+    ui = getUI(locale);
   const avatar = safeLink(site.avatar);
   return (
-    <aside className="profile-sidebar" aria-label="Hồ sơ cá nhân">
+    <aside className="profile-sidebar" aria-label={ui.profile}>
       <div className="profile-identity">
         {avatar ? (
           <img
@@ -20,7 +23,7 @@ export function ProfileSidebar() {
           </div>
         )}
         <div>
-          <a className="profile-name" href="/">
+          <a className="profile-name" href={localePath(locale)}>
             {site.name}
           </a>
           {site.role && <p className="profile-role">{site.role}</p>}
@@ -43,7 +46,7 @@ export function ProfileSidebar() {
           <li>
             <FileText size={16} />
             <a href={safeLink(site.cv)} target="_blank" rel="noreferrer">
-              Curriculum vitae <ArrowUpRight size={12} />
+              {ui.cv} <ArrowUpRight size={12} />
             </a>
           </li>
         )}
@@ -60,7 +63,7 @@ export function ProfileSidebar() {
         {site.email && (
           <li>
             <Mail size={16} />
-            <a href={`mailto:${site.email}`}>Email</a>
+            <a href={`mailto:${site.email}`}>{ui.email}</a>
           </li>
         )}
       </ul>
