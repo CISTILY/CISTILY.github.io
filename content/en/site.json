@@ -1,17 +1,25 @@
 {
   "name": "Nguyễn Văn Lê Bá Thành",
-  "role": "",
+  "role": "Undergraduate student",
   "affiliation": "University of Science, VNU-HCM",
   "location": "Ho Chi Minh City, Vietnam",
-  "avatar": "",
+  "avatar": "/images/avatar.jpg",
   "avatarAlt": "",
   "email": "lebathanh.nv@gmail.com",
-  "cv": "",
+  "cv": "/files/cv.pdf",
   "description": "Personal website · Research, gallery & posts.",
   "socials": [
     {
       "label": "GitHub",
       "url": "https://github.com/CISTILY"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/thành-nguyễn-văn-lê-bá-a63345251/"
+    },
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/lebathanh.nv"
     }
   ],
   "pages": {

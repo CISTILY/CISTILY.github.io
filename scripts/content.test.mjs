@@ -97,20 +97,21 @@ test('new Markdown files appear automatically, templates/drafts stay excluded, o
       throw Error('Unexpected test cleanup path');
     fs.rmSync(resolved, { recursive: true, force: true });
   });
-  fs.mkdirSync(path.join(directory, 'posts'));
+  const viRoot = path.join(directory, 'vi');
+  fs.mkdirSync(path.join(viRoot, 'posts'), { recursive: true });
   const write = (name, text) =>
-    fs.writeFileSync(path.join(directory, 'posts', name + '.md'), text);
+    fs.writeFileSync(path.join(viRoot, 'posts', name + '.md'), text);
   write('older', entry('order: 10\ndate: "2025-01-01"'));
   write('newer', entry('order: 10\ndate: "2026-01-01"'));
   write('_template', entry());
   write('hidden', entry().replace('published: true', 'published: false'));
   assert.deepEqual(
-    getEntries('posts', directory).map((item) => item.slug),
+    getEntries('posts', viRoot).map((item) => item.slug),
     ['newer', 'older'],
   );
   write('added-later', entry('order: 1'));
   assert.deepEqual(
-    getEntries('posts', directory).map((item) => item.slug),
+    getEntries('posts', viRoot).map((item) => item.slug),
     ['added-later', 'newer', 'older'],
   );
   write(
@@ -118,7 +119,7 @@ test('new Markdown files appear automatically, templates/drafts stay excluded, o
     entry('order: 1').replace('published: true', 'published: false'),
   );
   assert.deepEqual(
-    getEntries('posts', directory).map((item) => item.slug),
+    getEntries('posts', viRoot).map((item) => item.slug),
     ['newer', 'older'],
   );
   fs.mkdirSync(path.join(directory, 'en', 'posts'), { recursive: true });
@@ -134,6 +135,7 @@ test('new Markdown files appear automatically, templates/drafts stay excluded, o
     [['newer', 'English title']],
   );
   assert.equal(getEntriesForLocale('posts', 'vi', directory).length, 2);
+  assert.equal(getEntriesForLocale('posts', 'vi', directory)[0].title, 'Ví dụ');
   fs.writeFileSync(
     path.join(directory, 'en', 'posts', 'newer.md'),
     entry().replace('published: true', 'published: false'),
@@ -196,8 +198,8 @@ test('English and Vietnamese interface dictionaries expose the same editable key
           : [prefix + key],
       )
       .sort();
-  const vi = JSON.parse(fs.readFileSync('content/ui.vi.json', 'utf8'));
-  const en = JSON.parse(fs.readFileSync('content/ui.en.json', 'utf8'));
+  const vi = JSON.parse(fs.readFileSync('content/vi/ui.json', 'utf8'));
+  const en = JSON.parse(fs.readFileSync('content/en/ui.json', 'utf8'));
   assert.deepEqual(leaves(vi), leaves(en));
   assert.notEqual(
     formatDate('2026-09-07', 'vi'),

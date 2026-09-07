@@ -13,11 +13,7 @@ if (
   );
   process.exit(1);
 }
-const directory = path.resolve(
-  'content',
-  ...(locale === 'en' ? ['en'] : []),
-  collection,
-);
+const directory = path.resolve('content', locale, collection);
 const target = path.join(directory, `${slug}.md`);
 try {
   fs.writeFileSync(

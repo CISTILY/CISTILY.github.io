@@ -16,7 +16,6 @@ export function AboutContent({ locale }: { locale: Locale }) {
   const sections = [
     ['research-interests', ui.sections.researchInterests],
     ['background', ui.sections.background],
-    ['contact', ui.sections.contact],
   ] as const;
   return (
     <>

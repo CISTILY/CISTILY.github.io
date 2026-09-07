@@ -147,7 +147,7 @@ export function parseEntry(
 
 export function getEntries(
   collection: Collection,
-  contentRoot = root,
+  contentRoot = path.join(root, 'vi'),
 ): Entry[] {
   const directory = path.join(contentRoot, collection);
   if (!fs.existsSync(directory)) return [];
@@ -179,11 +179,7 @@ export function getAbout(
 ) {
   return renderMarkdown(
     fs.readFileSync(
-      path.join(
-        locale === 'en' ? path.join(root, 'en') : root,
-        'about',
-        `${section}.md`,
-      ),
+      path.join(root, locale, 'about', `${section}.md`),
       'utf8',
     ),
   );
@@ -193,10 +189,7 @@ export function getEntriesForLocale(
   locale: Locale = 'vi',
   contentRoot = root,
 ) {
-  return getEntries(
-    collection,
-    locale === 'en' ? path.join(contentRoot, 'en') : contentRoot,
-  );
+  return getEntries(collection, path.join(contentRoot, locale));
 }
 export function formatDate(date: string, locale: Locale = 'vi') {
   return date

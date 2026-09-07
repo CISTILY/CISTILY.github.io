@@ -1,6 +1,6 @@
-import vi from '@/content/ui.vi.json';
-import en from '@/content/ui.en.json';
-import siteVi from '@/content/site.json';
+import vi from '@/content/vi/ui.json';
+import en from '@/content/en/ui.json';
+import siteVi from '@/content/vi/site.json';
 import siteEn from '@/content/en/site.json';
 import type { Locale } from './locale';
 export type UI = typeof vi;

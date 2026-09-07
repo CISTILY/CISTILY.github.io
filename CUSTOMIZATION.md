@@ -8,13 +8,12 @@ Website có bốn trang **About, Research, Gallery, Posts**, với hồ sơ cá 
 
 | Bạn muốn làm gì? | Nơi thực hiện |
 | --- | --- |
-| Điền tên, chức danh, cơ quan, địa điểm, email, liên kết | [`content/site.json`](content/site.json) |
-| Điền Research Interests | [`content/about/research-interests.md`](content/about/research-interests.md) |
-| Viết Background, học vấn, kinh nghiệm | [`content/about/background.md`](content/about/background.md) |
-| Điền Contact | [`content/about/contact.md`](content/about/contact.md) |
-| Thêm nghiên cứu hoặc dự án | Thêm file `.md` trong [`content/research/`](content/research/) |
-| Thêm album ảnh | Thêm file `.md` trong [`content/gallery/`](content/gallery/) |
-| Thêm bài viết | Thêm file `.md` trong [`content/posts/`](content/posts/) |
+| Điền tên, chức danh, cơ quan, địa điểm, email, liên kết | [`content/vi/site.json`](content/vi/site.json) |
+| Điền Research Interests | [`content/vi/about/research-interests.md`](content/vi/about/research-interests.md) |
+| Viết Background, học vấn, kinh nghiệm | [`content/vi/about/background.md`](content/vi/about/background.md) |
+| Thêm nghiên cứu hoặc dự án | Thêm file `.md` trong [`content/vi/research/`](content/vi/research/) |
+| Thêm album ảnh | Thêm file `.md` trong [`content/vi/gallery/`](content/vi/gallery/) |
+| Thêm bài viết | Thêm file `.md` trong [`content/vi/posts/`](content/vi/posts/) |
 | Đưa ảnh lên | Thêm ảnh trong [`public/images/`](public/images/) |
 | Đưa CV hoặc tài liệu lên | Thêm file trong [`public/files/`](public/files/) |
 | Đổi màu, font hoặc bố cục | Sửa `app/globals.css` — tùy chọn nâng cao |
@@ -23,7 +22,7 @@ Các phần About hiện chỉ ghi chờ cập nhật. Bạn có thể thay toà
 
 ## 2. Hồ sơ bên trái và thông tin website
 
-Mở `content/site.json`. Giữ nguyên dấu ngoặc, dấu phẩy và **dấu nháy kép** của JSON; thay các giá trị cần thiết.
+Mở `content/vi/site.json`. Giữ nguyên dấu ngoặc, dấu phẩy và **dấu nháy kép** của JSON; thay các giá trị cần thiết.
 
 | Trường | Công dụng |
 | --- | --- |
@@ -45,19 +44,19 @@ Ví dụ một mục trong `socials`:
 { "label": "Google Scholar", "url": "https://scholar.google.com/citations?user=YOUR_ID" }
 ```
 
-Thay URL bằng hồ sơ thật. Thêm các mục khác vào mảng `socials` để hiển thị ORCID, LinkedIn hoặc trang cá nhân khác. Các mục cách nhau bằng dấu phẩy; mục cuối không có dấu phẩy thừa. Để `socials: []` nếu chưa muốn hiển thị liên kết.
+Thay URL bằng hồ sơ thật. Thêm các mục khác vào mảng `socials` để hiển thị ORCID iD, LinkedIn hoặc trang cá nhân khác. GitHub, LinkedIn và ORCID tự hiển thị icon tương ứng theo tên miền của URL; các trang khác dùng icon liên kết ngoài. Các mục cách nhau bằng dấu phẩy; mục cuối không có dấu phẩy thừa. Để `socials: []` nếu chưa muốn hiển thị liên kết.
 
 Để dùng ảnh đại diện hoặc CV, thêm file thật vào `public` rồi mới điền đường dẫn. Bước build kiểm tra các tài nguyên nội bộ bị thiếu.
 
-**Lưu ý:** email trong sidebar lấy từ `site.json`; nội dung Contact ở About lấy từ file Markdown riêng. Nếu hiển thị email ở cả hai nơi, hãy sửa cả hai khi địa chỉ thay đổi.
+Thông tin liên hệ hiển thị trong sidebar, lấy từ `email` và `socials` trong `site.json`.
 
 ## 3. Điền trang About
 
-Ba file About là Markdown thuần, **không cần phần thông tin YAML** ở đầu.
+Hai file About là Markdown thuần, **không cần phần thông tin YAML** ở đầu.
 
 ### Research Interests
 
-Thay nội dung `content/about/research-interests.md`, ví dụ:
+Thay nội dung `content/vi/about/research-interests.md`, ví dụ:
 
 ```md
 Mình quan tâm đến các bài toán tại giao điểm của công nghệ và ứng dụng thực tế.
@@ -69,7 +68,7 @@ Mình quan tâm đến các bài toán tại giao điểm của công nghệ và
 
 ### Background và học vấn
 
-Thay nội dung `content/about/background.md`, ví dụ:
+Thay nội dung `content/vi/about/background.md`, ví dụ:
 
 ```md
 Mình đang theo học/làm việc tại **[Tên trường hoặc đơn vị]**, tập trung vào [lĩnh vực của bạn].
@@ -84,25 +83,13 @@ Mình đang theo học/làm việc tại **[Tên trường hoặc đơn vị]**,
 Viết về kinh nghiệm, những dự án đã tham gia và định hướng tiếp theo.
 ```
 
-### Contact
-
-Thay nội dung `content/about/contact.md`, ví dụ:
-
-```md
-Bạn có thể liên hệ với mình qua:
-
-- Email: [you@example.com](mailto:you@example.com)
-- GitHub: [Tên tài khoản](https://github.com/your-username)
-- Đơn vị: [Tên trường hoặc cơ quan].
-```
-
 Thay các chỗ trong ngoặc bằng thông tin thật. Không cần giữ các mục chưa sử dụng. Khi để một file trống, tiêu đề của phần đó vẫn hiện.
 
 ## 4. Thêm mục mới: chỉ cần một file Markdown
 
 ### Cách dùng mẫu có sẵn
 
-1. Mở thư mục cần thêm: `content/research`, `content/gallery` hoặc `content/posts`.
+1. Mở thư mục cần thêm: `content/vi/research`, `content/vi/gallery` hoặc `content/vi/posts`.
 2. Sao chép file `_template.md` ngay trong thư mục đó.
 3. Đổi tên bản sao, ví dụ `ten-de-tai.md`, `hoi-thao-2026.md`, `ghi-chep-dau-tien.md`.
 4. Điền các trường đầu file và viết nội dung ở bên dưới.
@@ -113,9 +100,9 @@ Tên file dùng **chữ thường không dấu, số và dấu gạch ngang**. K
 
 | File mới | Trang chi tiết tự tạo |
 | --- | --- |
-| `content/research/ten-de-tai.md` | `/research/ten-de-tai/` |
-| `content/gallery/hoi-thao-2026.md` | `/gallery/hoi-thao-2026/` |
-| `content/posts/ghi-chep-dau-tien.md` | `/posts/ghi-chep-dau-tien/` |
+| `content/vi/research/ten-de-tai.md` | `/research/ten-de-tai/` |
+| `content/vi/gallery/hoi-thao-2026.md` | `/gallery/hoi-thao-2026/` |
+| `content/vi/posts/ghi-chep-dau-tien.md` | `/posts/ghi-chep-dau-tien/` |
 
 Không phải thêm vào danh sách nào khác. Các file bắt đầu bằng `_` hoặc `.` được bỏ qua; vì vậy cần **sao chép và đổi tên** mẫu, không chỉ đổi `published` trong `_template.md`. Website đọc file `.md` trực tiếp trong mỗi thư mục, chưa đọc thư mục con chứa bài.
 
@@ -170,7 +157,7 @@ coverAlt: ""
 
 ## 6. Mẫu Research hoàn chỉnh
 
-Tạo `content/research/ten-de-tai.md`:
+Tạo `content/vi/research/ten-de-tai.md`:
 
 ````md
 ---
@@ -213,7 +200,7 @@ Bạn có thể thêm nhiều đường dẫn trong Markdown: mã nguồn, bài 
 
 1. Tạo thư mục ảnh, ví dụ `public/images/hoi-thao/`.
 2. Chép các ảnh của bạn vào đó, ví dụ `anh-01.jpg`, `anh-02.jpg`.
-3. Tạo `content/gallery/hoi-thao.md` và điền mẫu dưới đây.
+3. Tạo `content/vi/gallery/hoi-thao.md` và điền mẫu dưới đây.
 
 ```md
 ---
@@ -248,7 +235,7 @@ Viết vài dòng về bối cảnh và câu chuyện phía sau những bức �
 
 ## 8. Mẫu Posts hoàn chỉnh
 
-Tạo `content/posts/bai-viet-dau-tien.md`:
+Tạo `content/vi/posts/bai-viet-dau-tien.md`:
 
 ````md
 ---
@@ -361,7 +348,7 @@ Việc cập nhật nội dung thường ngày không cần phần này.
 | Kích thước ảnh đại diện | `.profile-photo`, `.profile-initials` và các quy tắc mobile |
 | Số cột card | `.collection-grid` và các khối `@media` |
 | Nền bìa Gallery khi chưa có ảnh | `.entry-cover` |
-| Nhãn menu About/Research/Gallery/Posts | `nav` trong `content/ui.vi.json` hoặc `content/ui.en.json` |
+| Nhãn menu About/Research/Gallery/Posts | `nav` trong `content/vi/ui.json` hoặc `content/en/ui.json` |
 | Tiêu đề Research Interests/Background/Contact | `sections` trong các file UI theo ngôn ngữ |
 | Khung footer | `components/site-document.tsx`; nhãn dùng các file UI |
 | Favicon | `public/favicon.svg` |

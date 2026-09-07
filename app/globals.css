@@ -245,6 +245,9 @@ p {
   color: #4c5965;
   overflow-wrap: anywhere;
 }
+.profile-links > li > svg {
+  flex-shrink: 0;
+}
 .profile-links a:hover {
   color: var(--accent);
   text-decoration: underline;

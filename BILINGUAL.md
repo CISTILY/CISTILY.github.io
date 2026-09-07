@@ -4,16 +4,17 @@ Website có nút **VI / EN** trên thanh điều hướng. Hai phiên bản dùn
 
 ## 1. Nội dung của mỗi phiên bản nằm ở đâu?
 
+Nội dung tiếng Việt nằm trong `content/vi/`, tiếng Anh trong `content/en/`. Hai thư mục có cùng cấu trúc: `site.json`, `ui.json`, `about/`, `research/`, `gallery/`, `posts/`.
+
 | Phần cần chỉnh | Tiếng Việt | English |
 | --- | --- | --- |
-| Hồ sơ, liên hệ, ảnh đại diện, CV, mô tả trang | [`content/site.json`](content/site.json) | [`content/en/site.json`](content/en/site.json) |
-| Nhãn menu, nút, thông báo, tiêu đề các phần About | [`content/ui.vi.json`](content/ui.vi.json) | [`content/ui.en.json`](content/ui.en.json) |
-| Hướng nghiên cứu | [`content/about/research-interests.md`](content/about/research-interests.md) | [`content/en/about/research-interests.md`](content/en/about/research-interests.md) |
-| Học vấn và kinh nghiệm | [`content/about/background.md`](content/about/background.md) | [`content/en/about/background.md`](content/en/about/background.md) |
-| Nội dung liên hệ | [`content/about/contact.md`](content/about/contact.md) | [`content/en/about/contact.md`](content/en/about/contact.md) |
-| Nghiên cứu và dự án | [`content/research/`](content/research/) | [`content/en/research/`](content/en/research/) |
-| Album ảnh | [`content/gallery/`](content/gallery/) | [`content/en/gallery/`](content/en/gallery/) |
-| Bài viết | [`content/posts/`](content/posts/) | [`content/en/posts/`](content/en/posts/) |
+| Hồ sơ, liên hệ, ảnh đại diện, CV, mô tả trang | [`content/vi/site.json`](content/vi/site.json) | [`content/en/site.json`](content/en/site.json) |
+| Nhãn menu, nút, thông báo, tiêu đề các phần About | [`content/vi/ui.json`](content/vi/ui.json) | [`content/en/ui.json`](content/en/ui.json) |
+| Hướng nghiên cứu | [`content/vi/about/research-interests.md`](content/vi/about/research-interests.md) | [`content/en/about/research-interests.md`](content/en/about/research-interests.md) |
+| Học vấn và kinh nghiệm | [`content/vi/about/background.md`](content/vi/about/background.md) | [`content/en/about/background.md`](content/en/about/background.md) |
+| Nghiên cứu và dự án | [`content/vi/research/`](content/vi/research/) | [`content/en/research/`](content/en/research/) |
+| Album ảnh | [`content/vi/gallery/`](content/vi/gallery/) | [`content/en/gallery/`](content/en/gallery/) |
+| Bài viết | [`content/vi/posts/`](content/vi/posts/) | [`content/en/posts/`](content/en/posts/) |
 
 Ảnh và tài liệu vẫn dùng chung thư mục `public/images/` và `public/files/`. Hai bản có thể trỏ đến cùng ảnh hoặc dùng ảnh/CV khác nhau. `alt`, chú thích ảnh, tên thẻ và nội dung đều được chỉnh riêng trong từng file.
 
@@ -43,7 +44,7 @@ Website giữ các URL cũ cho bản Việt. Không tự đổi ngôn ngữ theo
 Ví dụ:
 
 ```text
-content/posts/my-first-post.md       → /posts/my-first-post/
+content/vi/posts/my-first-post.md       → /posts/my-first-post/
 content/en/posts/my-first-post.md    → /en/posts/my-first-post/
 ```
 
@@ -51,7 +52,7 @@ Tên hiển thị có thể khác hoàn toàn giữa hai ngôn ngữ. Tên file 
 
 ### Bước 1: Tạo file Việt
 
-Sao chép `content/posts/_template.md` thành `content/posts/my-first-post.md`, rồi điền:
+Sao chép `content/vi/posts/_template.md` thành `content/vi/posts/my-first-post.md`, rồi điền:
 
 ```md
 ---
@@ -119,7 +120,7 @@ Muốn bài chỉ xuất hiện bằng một ngôn ngữ, chỉ tạo file ở t
 
 ## 5. Đổi nhãn giao diện và hồ sơ
 
-- Đổi nhãn menu tại `nav` trong `content/ui.vi.json` hoặc `content/ui.en.json`.
+- Đổi nhãn menu tại `nav` trong `content/vi/ui.json` hoặc `content/en/ui.json`.
 - Đổi tiêu đề Hướng nghiên cứu/Background/Contact tại `sections` trong cùng file.
 - Đổi nhãn card tại `actions`, thông báo trống tại `emptyTitle`/`emptyDescription`, nút quay lại tại `back`.
 - Đổi tiêu đề và mô tả trang danh sách tại `pages` trong `site.json` của ngôn ngữ tương ứng. Nhãn menu và tiêu đề trang là hai trường riêng.

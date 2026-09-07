@@ -2,6 +2,7 @@ import { MapPin, Mail, FileText, ArrowUpRight, Building2 } from 'lucide-react';
 import { getSite, getUI } from '@/lib/i18n';
 import { localePath, type Locale } from '@/lib/locale';
 import { safeLink } from '@/lib/content';
+import { SocialIcon } from '@/components/social-icon';
 export function ProfileSidebar({ locale }: { locale: Locale }) {
   const site = getSite(locale),
     ui = getUI(locale);
@@ -54,7 +55,7 @@ export function ProfileSidebar({ locale }: { locale: Locale }) {
           .filter((link) => safeLink(link.url))
           .map((link) => (
             <li key={link.label}>
-              <ArrowUpRight size={16} />
+              <SocialIcon url={link.url} />
               <a href={safeLink(link.url)} target="_blank" rel="noreferrer">
                 {link.label}
               </a>
