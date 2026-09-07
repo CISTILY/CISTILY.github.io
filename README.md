@@ -1,72 +1,69 @@
-# CISTILY — Portfolio & Blog
+# CISTILY — Academic personal website
 
-Website cá nhân tiếng Việt, dùng React + TypeScript, xuất thành website tĩnh để chạy trên GitHub Pages hoặc Sites. Có giới thiệu, định hướng, học vấn, project và bài viết; hỗ trợ điện thoại, bàn phím và chế độ giảm chuyển động.
+Website cá nhân lấy cảm hứng bố cục từ [lexi-jones.github.io](https://lexi-jones.github.io): hồ sơ bên trái, nội dung bên phải, menu **About · Research · Gallery · Posts**. Nội dung và hình ảnh cá nhân của website tham khảo không được sao chép.
 
-Xem [hướng dẫn tùy chỉnh chi tiết](CUSTOMIZATION.md) để đổi nội dung cá nhân, học vấn, project, blog, màu sắc, bố cục, ảnh đại diện và thông tin website.
+## Tự cập nhật mà không sửa code giao diện
 
-## Chọn project để đưa lên
+| Nội dung | File/thư mục cần sửa |
+| --- | --- |
+| Tên, ảnh đại diện, chức danh, nơi làm việc, liên kết | [`content/site.json`](content/site.json) |
+| Research Interests | [`content/about/research-interests.md`](content/about/research-interests.md) |
+| Background và học vấn | [`content/about/background.md`](content/about/background.md) |
+| Contact | [`content/about/contact.md`](content/about/contact.md) |
+| Research / dự án | [`content/research/`](content/research/) |
+| Gallery / album ảnh | [`content/gallery/`](content/gallery/) |
+| Posts / blog | [`content/posts/`](content/posts/) |
+| Ảnh, CV hoặc tài liệu | [`public/images/`](public/images/), [`public/files/`](public/files/) |
 
-Mở `content/portfolio.ts`, tìm danh sách `projects`:
+**Mỗi file Markdown là một card và một trang chi tiết.** Sao chép `_template.md` trong thư mục tương ứng, đổi tên, điền nội dung rồi đặt `published: true`. Không cần khai báo thêm route hay sửa danh sách trong TypeScript.
 
-- Đặt `published: true` để hiển thị project.
-- Đặt `published: false` để ẩn project.
-- Kéo/di chuyển nguyên mục lên xuống trong mảng để đổi thứ tự.
-- Sao chép một mục để thêm project. Đặt `id` riêng, thay tiêu đề, mô tả, tags, các đoạn `content` và `url` (repository hoặc demo).
-- Xóa `example: true` sau khi thay nội dung mẫu bằng project thật.
+Xem [CUSTOMIZATION.md — hướng dẫn đầy đủ và ví dụ điền sẵn](CUSTOMIZATION.md).
 
-```ts
-{
-  id: 'ten-project',
-  published: true,
-  title: 'Tên project của bạn',
-  category: 'WEB DEVELOPMENT',
-  coverLabel: 'my project_',
-  description: 'Project giải quyết vấn đề gì?',
-  tags: ['Python', 'React'],
-  content: [
-    'Bối cảnh và mục tiêu của project.',
-    'Vai trò, cách thực hiện và kết quả của bạn.',
-  ],
-  url: 'https://github.com/CISTILY/ten-repository',
-},
-```
-
-Đây là cách chọn bằng tệp nội dung, chưa có trang quản trị trực tuyến. Thay đổi có hiệu lực sau khi xây dựng và triển khai lại. `published: false` chỉ ẩn khỏi giao diện, không phải cơ chế bảo mật: không lưu bí mật hoặc nội dung nhạy cảm vào mã nguồn.
-
-## Thông tin cá nhân và blog
-
-Cùng trong `content/portfolio.ts`:
-
-- `profile`: tên, giới thiệu, định hướng, sở thích, GitHub, email và danh sách học vấn.
-- `posts`: thêm bài viết bằng các đoạn trong `content`; dùng `published` để bật/tắt và sắp xếp mảng để đổi thứ tự.
-- Để `email` trống thì nút kết nối dẫn tới GitHub.
-
-Tên CISTILY và GitHub lấy theo repo hiện tại. Giới thiệu/định hướng là nội dung khởi đầu; trường, chuyên ngành, project mẫu và bài mẫu cần thay bằng thông tin thực tế trước khi công khai.
-
-## Chạy và kiểm tra
+## Chạy website
 
 Yêu cầu Node.js 22.13+.
 
 ```sh
 npm ci
 npm run dev
-npm run build
-npx tsc --noEmit --incremental false
 ```
 
-Lệnh chạy thử in địa chỉ xem website. Bản xuất nằm trong `dist/client`. `scripts/build.mjs` cho Windows đóng các worker tự nhiên sau build thành công để tránh lỗi libuv của CLI; các lỗi build vẫn trả mã lỗi như bình thường.
+Mở địa chỉ được in ra. Chỉnh Markdown rồi lưu; bản xem thử tự tải lại khi thêm, sửa hoặc xóa file.
 
-## GitHub Pages
+Có thể tạo bản nháp từ mẫu bằng lệnh tùy chọn:
 
-Repo đã có workflow `.github/workflows/deploy.yml`. Trong GitHub, vào **Settings → Pages → Source → GitHub Actions**. Sau khi đẩy thay đổi lên nhánh `main`, workflow sẽ kiểm tra TypeScript, build và triển khai. Có thể chạy bằng **Actions → Deploy portfolio → Run workflow**.
+```sh
+npm run new:research -- ten-de-tai
+npm run new:gallery -- ten-album
+npm run new:post -- ten-bai-viet
+```
 
-Workflow dành cho website gốc `CISTILY.github.io`; đổi sang repo con cần bổ sung cấu hình đường dẫn nền. Việc tạo workflow ở đây chưa đẩy mã hoặc bật Pages trên GitHub.
+## Kiểm tra và xuất website
 
-## Cấu trúc
+```sh
+npx tsc --noEmit --incremental false
+npm run test:content
+npm run build
+```
 
-- `app/page.tsx`: bố cục trang.
-- `app/globals.css`: màu sắc, khoảng cách và giao diện điện thoại.
-- `components/reading-card.tsx`: cửa sổ đọc project/bài viết.
-- `content/portfolio.ts`: toàn bộ nội dung có thể chỉnh sửa.
+`npm run build` tự chạy bước `postbuild`. Bản tĩnh hoàn chỉnh nằm trong `dist/client`, gồm trang chủ, ba trang danh sách, các trang chi tiết được xuất bản và trang 404. Bước hoàn tất kiểm tra tài nguyên/đường dẫn nội bộ và tạo các file `index.html` để mở trực tiếp URL thư mục trên GitHub Pages.
 
-Blog hiện đọc trong cửa sổ trên trang chủ, chưa có URL riêng cho từng bài hay trình soạn thảo trực tuyến.
+Script build giữ giải pháp đóng worker tự nhiên trên Windows; lỗi build vẫn làm quy trình thất bại. Cấu hình `trailingSlash: false` tránh lỗi chuyển hướng của trình xuất route động; bước `postbuild` bổ sung URL dạng `/posts/ten-bai/` cho static hosting.
+
+## Triển khai
+
+Workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) kiểm tra TypeScript, nội dung, build và triển khai GitHub Pages khi đẩy lên `main` hoặc chạy thủ công. Repo cần được cấu hình Pages sử dụng GitHub Actions. Mỗi lần thêm Markdown hoặc ảnh, workflow sẽ tạo lại website; không đẩy `dist` lên Git.
+
+Bản Sites được cập nhật bằng một lần lưu và triển khai phiên bản mới riêng. Đẩy lên GitHub không tự cập nhật Sites.
+
+## Cấu trúc giao diện
+
+- `app/layout.tsx`: khung chung, thanh menu, hồ sơ, footer.
+- `app/page.tsx`: About.
+- `app/[collection]/page.tsx`: trang danh sách Research, Gallery, Posts.
+- `app/[collection]/[slug]/page.tsx`: trang chi tiết tự sinh từ Markdown.
+- `components/entry-card.tsx`: card tóm tắt.
+- `lib/content.ts`: đọc, kiểm tra và hiển thị nội dung Markdown.
+- `app/globals.css`: màu sắc, typography, bố cục desktop/mobile.
+
+Thông tin Research Interests, Background và Contact được để chờ bạn điền. Các mục mẫu có nhãn rõ ràng. Dữ liệu phiên bản trước được giữ trong `content/legacy/portfolio.ts` để tham khảo, **không còn được website đọc**.

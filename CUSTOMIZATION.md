@@ -1,412 +1,401 @@
-# Hướng dẫn tùy chỉnh website cá nhân
+# Hướng dẫn điền nội dung và tùy chỉnh website
 
-Tài liệu này mô tả các phần có thể chỉnh trong **phiên bản hiện tại** của website: thông tin cá nhân, học vấn, project, blog, màu sắc, bố cục, ảnh đại diện và thông tin trên tab trình duyệt.
+Website có bốn trang **About, Research, Gallery, Posts**, với hồ sơ cá nhân ở bên trái. Bạn cập nhật bằng file nội dung; không cần sửa React/TypeScript để thêm nghiên cứu, album hay bài viết.
 
-Hầu hết thay đổi nội dung chỉ cần sửa [`content/portfolio.ts`](content/portfolio.ts). Các ví dụ dưới đây là dữ liệu minh họa, hãy thay bằng thông tin của bạn.
+## 1. Bắt đầu từ đâu?
 
-## 1. Bản đồ các phần có thể tùy chỉnh
-
-| Muốn thay đổi | Nơi chỉnh sửa | Mức độ |
-| --- | --- | --- |
-| Tên, giới thiệu, định hướng, sở thích | `profile` trong `content/portfolio.ts` | Chỉnh nội dung |
-| GitHub, email liên hệ | `profile.github`, `profile.email` | Chỉnh nội dung |
-| Trường, chuyên ngành, thời gian học | `profile.education` | Chỉnh nội dung |
-| Project hiển thị, thứ tự, mô tả, công nghệ, đường dẫn | `projects` trong `content/portfolio.ts` | Chỉnh nội dung |
-| Bài blog hiển thị, thứ tự, nội dung, thời gian đọc | `posts` trong `content/portfolio.ts` | Chỉnh nội dung |
-| Tiêu đề các phần, chữ trên nút, câu chào, chân trang | `app/page.tsx` | Sửa chữ trong giao diện |
-| Menu, thứ tự hoặc ẩn cả một phần | `navigation` và các khối `<section>` trong `app/page.tsx` | Sửa bố cục |
-| Màu, font, khoảng cách, số cột project | `app/globals.css` | Sửa CSS |
-| Chữ viết tắt hoặc ảnh đại diện | Khối `.monogram` trong `app/page.tsx` | Sửa giao diện |
-| Biểu tượng tab trình duyệt | `public/favicon.svg` | Thay tài nguyên |
-| Tiêu đề tab, mô tả website, ngôn ngữ khai báo | `app/layout.tsx` | Sửa cấu hình giao diện |
-| Cửa sổ đọc project/bài viết | `components/reading-card.tsx` và CSS `.reading-*` | Sửa giao diện |
-
-**Bắt đầu nhanh:** sửa `profile`, thay thông tin học vấn mẫu, giữ những project muốn giới thiệu bằng `published: true`, rồi thay hoặc ẩn các bài blog mẫu.
-
-## 2. Thông tin cá nhân và liên hệ
-
-Mở [`content/portfolio.ts`](content/portfolio.ts), tìm `export const profile`.
-
-| Trường | Hiển thị ở đâu / tác dụng |
+| Bạn muốn làm gì? | Nơi thực hiện |
 | --- | --- |
-| `name` | Tên ở đầu trang, câu chào, chân trang và tiêu đề tab |
-| `tagline` | Câu ngắn trong thẻ giới thiệu bên phải |
-| `intro` | Đoạn mở đầu dưới câu chào; cũng là mô tả website trong metadata |
-| `about` | Đoạn giới thiệu dài trong phần “Về mình” |
-| `direction` | Nội dung “Điều mình hướng đến” |
-| `interests` | Danh sách nhãn sở thích / lĩnh vực quan tâm |
-| `github` | Đường dẫn GitHub ở đầu trang và nút kết nối khi chưa có email |
-| `email` | Nếu có giá trị, nút kết nối chuyển sang “Gửi lời chào” và mở ứng dụng email |
+| Điền tên, chức danh, cơ quan, địa điểm, email, liên kết | [`content/site.json`](content/site.json) |
+| Điền Research Interests | [`content/about/research-interests.md`](content/about/research-interests.md) |
+| Viết Background, học vấn, kinh nghiệm | [`content/about/background.md`](content/about/background.md) |
+| Điền Contact | [`content/about/contact.md`](content/about/contact.md) |
+| Thêm nghiên cứu hoặc dự án | Thêm file `.md` trong [`content/research/`](content/research/) |
+| Thêm album ảnh | Thêm file `.md` trong [`content/gallery/`](content/gallery/) |
+| Thêm bài viết | Thêm file `.md` trong [`content/posts/`](content/posts/) |
+| Đưa ảnh lên | Thêm ảnh trong [`public/images/`](public/images/) |
+| Đưa CV hoặc tài liệu lên | Thêm file trong [`public/files/`](public/files/) |
+| Đổi màu, font hoặc bố cục | Sửa `app/globals.css` — tùy chọn nâng cao |
 
-Ví dụ thay các dòng tương ứng trong `profile`; giữ lại `education` để chỉnh riêng ở phần tiếp theo:
+Các phần About hiện chỉ ghi chờ cập nhật. Bạn có thể thay toàn bộ nội dung của từng file bằng thông tin thật, dùng ví dụ bên dưới làm khung.
 
-```ts
-name: 'Nguyễn An',
-tagline: 'Học từ những bài toán thực tế.',
-intro: 'Mình quan tâm đến phát triển phần mềm và các ứng dụng của AI.',
-about: 'Mình thích tìm hiểu vấn đề, thử nghiệm giải pháp và ghi lại những điều học được qua mỗi project.',
-direction: 'Mình hướng đến vai trò kỹ sư phần mềm, tập trung vào các sản phẩm dễ sử dụng và có thể duy trì lâu dài.',
-interests: ['Software Engineering', 'AI', 'Python', 'Viết blog'],
-github: 'https://github.com/your-username',
-email: 'you@example.com',
-```
+## 2. Hồ sơ bên trái và thông tin website
 
-Để `email: ''` nếu chưa muốn hiển thị kênh email. Nút email dùng `mailto:`, không có biểu mẫu gửi thư hay dịch vụ gửi email tích hợp.
+Mở `content/site.json`. Giữ nguyên dấu ngoặc, dấu phẩy và **dấu nháy kép** của JSON; thay các giá trị cần thiết.
 
-Chữ lớn trên thẻ giới thiệu hiện lấy **hai ký tự đầu** của `profile.name`, không tự lấy chữ cái đầu của từng từ. Tên dài có thể cần giảm cỡ chữ `.hero h1` ở phần giao diện.
-
-## 3. Học vấn
-
-Trong `profile.education`, mỗi cặp `{ ... }` là một mục học vấn:
-
-```ts
-education: [
-  {
-    period: '2022 – 2026',
-    school: 'Tên trường đại học',
-    major: 'Cử nhân Công nghệ thông tin',
-    description: 'Tập trung vào kỹ thuật phần mềm, cơ sở dữ liệu và học máy.',
-  },
-  {
-    period: '2025',
-    school: 'Tên chương trình đào tạo',
-    major: 'Khóa học chuyên sâu',
-    description: 'Những nội dung hoặc kỹ năng nổi bật đã học.',
-  },
-],
-```
-
-- Thêm mục: sao chép một khối `{ ... }` và đổi nội dung.
-- Đổi thứ tự: di chuyển nguyên khối trong mảng; website không tự sắp xếp theo thời gian.
-- Xóa mục: xóa nguyên khối cùng dấu phẩy đi kèm.
-- `education: []` làm danh sách trống nhưng **vẫn giữ tiêu đề Học vấn**. Muốn ẩn cả phần, xem mục 6.
-
-Giao diện hiện dùng `school` làm khóa cho mỗi mục. Nếu có nhiều chương trình cùng một trường, đổi `key={item.school}` trong `app/page.tsx` thành biểu thức dưới đây và đảm bảo bộ ba này không trùng nhau:
-
-```tsx
-key={`${item.school}-${item.major}-${item.period}`}
-```
-
-## 4. Chọn và quản lý project
-
-### Hiện, ẩn và sắp xếp
-
-Tìm `export const projects: Project[] = [...]` trong [`content/portfolio.ts`](content/portfolio.ts).
-
-```ts
-published: true,  // Hiện project
-published: false, // Ẩn project
-```
-
-Chỉ dùng **một** dòng `published` trong mỗi project. Website hiển thị các project được bật theo đúng thứ tự trong mảng. Đưa nguyên khối project lên đầu mảng để nó xuất hiện trước.
-
-Việc lựa chọn hoàn toàn thủ công; website chưa tự tải danh sách repository từ GitHub. Nếu ẩn hết project, phần Projects hiện thông báo chờ nội dung.
-
-### Thêm một project
-
-Dán khối sau **vào bên trong** mảng `projects`, trước dấu `];` kết thúc mảng:
-
-```ts
-{
-  id: 'study-planner',
-  published: true,
-  example: false,
-  title: 'Study Planner',
-  category: 'WEB APPLICATION',
-  coverLabel: 'plan. learn. repeat.',
-  description: 'Ứng dụng lên kế hoạch học tập và theo dõi công việc mỗi tuần.',
-  tags: ['React', 'TypeScript'],
-  content: [
-    'Bài toán: giúp người học chia mục tiêu lớn thành các nhiệm vụ nhỏ.',
-    'Vai trò: thiết kế giao diện, xây dựng tính năng và kiểm tra trải nghiệm.',
-    'Kết quả: mô tả đúng phần đã hoàn thành, kèm giới hạn hoặc bài học nếu có.',
-  ],
-  url: 'https://github.com/your-username/study-planner',
-},
-```
-
-| Trường | Cách sử dụng |
+| Trường | Công dụng |
 | --- | --- |
-| `id` | Mã riêng, không trùng với project khác; chưa phải URL của trang chi tiết |
-| `published` | Bật/tắt hiển thị |
-| `example` | `true` hiện nhãn “Mẫu”; đặt `false` hoặc bỏ trường này khi là project thật |
-| `title` | Tên project |
-| `category` | Nhãn lĩnh vực trên vùng bìa |
-| `coverLabel` | Dòng chữ lớn trên bìa, nên ngắn gọn |
-| `description` | Mô tả ngắn trên thẻ và trong cửa sổ chi tiết |
-| `tags` | Các nhãn công nghệ; có thể để `[]` |
-| `content` | Các đoạn mô tả chi tiết; mỗi chuỗi là một đoạn văn |
-| `url` | Không bắt buộc; đường dẫn repository hoặc demo |
+| `name` | Tên ở đầu trang, sidebar, tiêu đề tab và footer |
+| `role` | Chức danh/chuyên ngành dưới tên; `""` để ẩn |
+| `affiliation` | Trường/cơ quan; `""` để ẩn |
+| `location` | Địa điểm; `""` để ẩn |
+| `avatar` | Đường dẫn ảnh đại diện, ví dụ `/images/avatar.jpg`; để trống dùng hai ký tự đầu của tên |
+| `avatarAlt` | Mô tả ngắn của ảnh đại diện |
+| `email` | Địa chỉ email cho liên kết trong sidebar; không thêm `mailto:` vào giá trị này |
+| `cv` | Đường dẫn PDF, ví dụ `/files/cv.pdf`; `""` để ẩn |
+| `description` | Mô tả chung dùng trong metadata |
+| `socials` | Danh sách liên kết bên ngoài; mỗi mục gồm `label` và `url` |
+| `pages.research`, `pages.gallery`, `pages.posts` | Tiêu đề và mô tả của từng trang danh sách |
 
-Nút “Khám phá project” mở nội dung chi tiết. Trong cửa sổ này, nút “Xem project” chỉ xuất hiện khi `url` bắt đầu bằng `http://` hoặc `https://`. Mỗi project hiện hỗ trợ một đường dẫn ngoài.
+Ví dụ một mục trong `socials`:
 
-`published: false` là lựa chọn hiển thị, không phải quyền truy cập. Không đưa dữ liệu cần giữ kín vào repository chỉ vì đã ẩn mục đó.
-
-## 5. Blog
-
-Tìm `export const posts = [...]` trong [`content/portfolio.ts`](content/portfolio.ts). Thêm khối sau vào mảng:
-
-```ts
-{
-  id: 'bai-hoc-tu-project-dau-tien',
-  published: true,
-  example: false,
-  title: 'Những điều mình học từ project đầu tiên',
-  category: 'Học tập',
-  readingTime: '3 phút đọc',
-  description: 'Một vài bài học về cách bắt đầu, thử nghiệm và hoàn thiện sản phẩm.',
-  content: [
-    'Đoạn mở đầu: mình bắt đầu project này vì điều gì?',
-    'Đoạn tiếp theo: một khó khăn cụ thể và cách mình xử lý.',
-    'Đoạn kết: điều mình sẽ làm khác ở project tiếp theo.',
-  ],
-},
+```json
+{ "label": "Google Scholar", "url": "https://scholar.google.com/citations?user=YOUR_ID" }
 ```
 
-| Trường | Cách sử dụng |
+Thay URL bằng hồ sơ thật. Thêm các mục khác vào mảng `socials` để hiển thị ORCID, LinkedIn hoặc trang cá nhân khác. Các mục cách nhau bằng dấu phẩy; mục cuối không có dấu phẩy thừa. Để `socials: []` nếu chưa muốn hiển thị liên kết.
+
+Để dùng ảnh đại diện hoặc CV, thêm file thật vào `public` rồi mới điền đường dẫn. Bước build kiểm tra các tài nguyên nội bộ bị thiếu.
+
+**Lưu ý:** email trong sidebar lấy từ `site.json`; nội dung Contact ở About lấy từ file Markdown riêng. Nếu hiển thị email ở cả hai nơi, hãy sửa cả hai khi địa chỉ thay đổi.
+
+## 3. Điền trang About
+
+Ba file About là Markdown thuần, **không cần phần thông tin YAML** ở đầu.
+
+### Research Interests
+
+Thay nội dung `content/about/research-interests.md`, ví dụ:
+
+```md
+Mình quan tâm đến các bài toán tại giao điểm của công nghệ và ứng dụng thực tế.
+
+- Lĩnh vực nghiên cứu thứ nhất.
+- Lĩnh vực nghiên cứu thứ hai.
+- Câu hỏi hoặc hướng tiếp cận muốn tìm hiểu thêm.
+```
+
+### Background và học vấn
+
+Thay nội dung `content/about/background.md`, ví dụ:
+
+```md
+Mình đang theo học/làm việc tại **[Tên trường hoặc đơn vị]**, tập trung vào [lĩnh vực của bạn].
+
+### Education
+
+- **[Thời gian] — [Tên trường]**: [Bằng cấp/chuyên ngành].
+- **[Thời gian] — [Chương trình khác]**: [Nội dung liên quan].
+
+### Experience
+
+Viết về kinh nghiệm, những dự án đã tham gia và định hướng tiếp theo.
+```
+
+### Contact
+
+Thay nội dung `content/about/contact.md`, ví dụ:
+
+```md
+Bạn có thể liên hệ với mình qua:
+
+- Email: [you@example.com](mailto:you@example.com)
+- GitHub: [Tên tài khoản](https://github.com/your-username)
+- Đơn vị: [Tên trường hoặc cơ quan].
+```
+
+Thay các chỗ trong ngoặc bằng thông tin thật. Không cần giữ các mục chưa sử dụng. Khi để một file trống, tiêu đề của phần đó vẫn hiện.
+
+## 4. Thêm mục mới: chỉ cần một file Markdown
+
+### Cách dùng mẫu có sẵn
+
+1. Mở thư mục cần thêm: `content/research`, `content/gallery` hoặc `content/posts`.
+2. Sao chép file `_template.md` ngay trong thư mục đó.
+3. Đổi tên bản sao, ví dụ `ten-de-tai.md`, `hoi-thao-2026.md`, `ghi-chep-dau-tien.md`.
+4. Điền các trường đầu file và viết nội dung ở bên dưới.
+5. Khi sẵn sàng, đổi `published: false` thành `published: true`.
+6. Lưu file, xem thử rồi triển khai bản mới.
+
+Tên file dùng **chữ thường không dấu, số và dấu gạch ngang**. Không dùng khoảng trắng hoặc ký tự đặc biệt. Tên file quyết định URL:
+
+| File mới | Trang chi tiết tự tạo |
 | --- | --- |
-| `id` | Mã riêng của bài, không trùng bài khác |
-| `published` | `true` để hiện, `false` để ẩn |
-| `example` | Đặt `false` để bỏ nhãn “Bài mẫu”; nên giữ trường này vì kiểu dữ liệu hiện được suy ra từ các bài có sẵn |
-| `title` | Tiêu đề bài |
-| `category` | Chuyên mục hiển thị; chưa có bộ lọc theo chuyên mục |
-| `readingTime` | Chuỗi nhập thủ công, không tự tính từ độ dài bài |
-| `description` | Đoạn giới thiệu ngắn |
-| `content` | Danh sách các đoạn văn của bài |
+| `content/research/ten-de-tai.md` | `/research/ten-de-tai/` |
+| `content/gallery/hoi-thao-2026.md` | `/gallery/hoi-thao-2026/` |
+| `content/posts/ghi-chep-dau-tien.md` | `/posts/ghi-chep-dau-tien/` |
 
-Đổi thứ tự bằng cách di chuyển các khối bài viết trong mảng. Nếu ẩn hết bài, phần Blog hiện thông báo đang chuẩn bị nội dung.
+Không phải thêm vào danh sách nào khác. Các file bắt đầu bằng `_` hoặc `.` được bỏ qua; vì vậy cần **sao chép và đổi tên** mẫu, không chỉ đổi `published` trong `_template.md`. Website đọc file `.md` trực tiếp trong mỗi thư mục, chưa đọc thư mục con chứa bài.
 
-**Định dạng hiện tại:** bài viết mở trong cửa sổ trên trang chủ, chưa có trang hoặc URL riêng. Nội dung được hiển thị như văn bản thuần: `**chữ đậm**`, Markdown, HTML và code block không được chuyển thành định dạng tương ứng. Muốn thêm ảnh, liên kết trong bài, tiêu đề con hoặc Markdown cần mở rộng `components/reading-card.tsx` và cấu trúc dữ liệu.
+### Cách tạo bản nháp bằng lệnh — tùy chọn
 
-## 6. Tiêu đề, nút, menu và thứ tự các phần
+Trong thư mục repo:
 
-Mở [`app/page.tsx`](app/page.tsx). Các câu cố định như “Xin chào”, “Đi từng bước”, “Từ ý tưởng đến thực tế”, “KẾT NỐI” và chữ chân trang được viết trực tiếp trong file này. Tìm đúng câu và thay chữ giữa các thẻ, giữ nguyên cấu trúc JSX.
-
-Menu nằm trong biến `navigation`. Mỗi mục có dạng:
-
-```ts
-['projects', 'Projects'],
+```sh
+npm run new:research -- ten-de-tai
+npm run new:gallery -- hoi-thao-2026
+npm run new:post -- ghi-chep-dau-tien
 ```
 
-- Phần đầu (`projects`) là đích điều hướng, phải khớp `id="projects"` của section.
-- Phần sau (`Projects`) là chữ trên menu, có thể đổi thành `Dự án` mà không đổi đích.
-- Thứ tự trong `navigation` chỉ đổi thứ tự menu.
-- Muốn đổi thứ tự nội dung, di chuyển cả khối `<section>...</section>` tương ứng trong `<main>`.
-- Muốn ẩn cả một phần, bỏ khối section và mục menu tương ứng; cập nhật các nút còn trỏ đến nó. Ví dụ ẩn Blog thì cần xử lý cả nút “Đọc blog” trong phần đầu trang.
-- Các số `01 /`, `02 /`… là chữ nhập sẵn, cần sửa lại nếu đổi thứ tự section. Số thứ tự project/bài viết thì được tạo tự động.
+Mỗi lệnh sao chép đúng mẫu và tạo bản nháp. Lệnh sẽ từ chối nếu tên đã tồn tại, không ghi đè nội dung cũ. Sau đó bạn chỉ cần mở file vừa tạo và điền nội dung.
 
-Năm ở chân trang lấy từ `new Date().getFullYear()`; với bản xuất tĩnh, xây dựng và triển khai lại để cập nhật nội dung xuất sang năm mới.
+## 5. Các trường chung ở đầu file
 
-## 7. Màu sắc, font và bố cục
+Mỗi mục Research, Gallery hoặc Posts có phần đầu nằm giữa **hai dòng `---`**. Phần này gọi là front matter, chứa thông tin để tạo card và trang chi tiết.
 
-### Màu chính
-
-Mở [`app/globals.css`](app/globals.css), tìm khối `:root`. Đây là các giá trị hiện tại:
-
-```css
-:root {
-  --background: #fcfdfb; /* Nền trang */
-  --foreground: #192b22; /* Chữ chính */
-  --popover: #fff; /* Nền cửa sổ đọc */
-  --primary: #176642; /* Màu chính của nút và một số điểm nhấn */
-  --line: #dfe5df; /* Đường viền */
-  --muted: #637269; /* Chữ mô tả phụ */
-}
+```yaml
+---
+title: "Tiêu đề của bạn"
+summary: "Một đến hai câu tóm tắt hiển thị trên card."
+published: false
+sample: false
+date: "2026-09-07"
+order: 100
+tags: ["Chủ đề A", "Chủ đề B"]
+cover: ""
+coverAlt: ""
+---
 ```
 
-Đổi các mã màu này trong khối có sẵn. Một số màu đang viết trực tiếp trong CSS nên đổi `--primary` **chưa đổi toàn bộ giao diện**:
-
-| Thành phần | Selector cần tìm |
+| Trường | Quy tắc |
 | --- | --- |
-| Màu nút khi rê chuột | `.primary:hover` |
-| Chấm sau tên và tiêu đề | `.wordmark > span`, `.green-dot` |
-| Chấm trạng thái | `.status-dot` |
-| Nền và viền thẻ giới thiệu | `.profile-panel` |
-| Bìa project thứ nhất | `.project-cover` |
-| Hai tông bìa kế tiếp | `.project-tone-1 .project-cover`, `.project-tone-2 .project-cover` |
-| Nền khối kết nối | `.contact` |
-| Nền khi bôi chọn chữ | `::selection` |
+| `title` | Bắt buộc khi xuất bản; tiêu đề card, trang chi tiết và tab trình duyệt |
+| `summary` | Bắt buộc khi xuất bản; tóm tắt card, đoạn mở đầu và mô tả trang |
+| `published` | Chỉ `true` mới xuất bản; `false` hoặc bỏ trường này giữ mục ở trạng thái ẩn |
+| `sample` | `true` hiện nhãn “Nội dung mẫu”; `false` hoặc bỏ trường này để bỏ nhãn |
+| `date` | Không bắt buộc; dùng `"YYYY-MM-DD"` hoặc `""` để không hiện ngày |
+| `order` | Không bắt buộc, mặc định `100`; số nhỏ hơn đứng trước |
+| `tags` | Danh sách nhãn; `[]` hoặc bỏ trường này để không hiện nhãn |
+| `cover` | Ảnh bìa; dùng đường dẫn `/images/...` hoặc URL ảnh HTTP(S); để trống nếu không dùng |
+| `coverAlt` | Mô tả nội dung ảnh bìa |
+| `images` | Danh sách ảnh có `src`, `alt`, `caption`; dùng chủ yếu cho Gallery |
 
-Bìa project luân phiên ba tông theo thứ tự các project đang hiện (`index % 3`), chưa có trường chọn màu riêng trong dữ liệu. Khi đổi bảng màu, kiểm tra cả chữ trên nền, nút lúc rê chuột và đường viền khi dùng bàn phím. Website hiện có một giao diện sáng, chưa có nút chuyển sáng/tối.
+**Thứ tự tự động:** `order` tăng dần → ngày mới hơn trước → tên file theo thứ tự chữ cái. Muốn ghim một mục lên đầu, đặt `order: 1`. Nếu muốn sắp theo ngày, để các mục cùng `order`.
 
-### Font chữ và kích thước
+`published` và `sample` phải là `true`/`false` **không có dấu nháy**. Đặt chuỗi trong dấu nháy kép giúp tránh lỗi khi tiêu đề chứa dấu `:` hoặc `#`. Mỗi tên trường chỉ xuất hiện một lần trong phần đầu.
 
-Font chữ chính được đặt trong `body`; các biến `--font-sans` và `--font-heading` nằm trong `@theme inline`. Đổi cả các nơi này để phần trang và cửa sổ đọc thống nhất. Vùng bìa và một số nhãn dùng `monospace` riêng.
+Đổi tên file sẽ đổi URL. Nếu đã chia sẻ URL cũ, nên giữ nguyên tên file và chỉ sửa `title`. `published: false` loại bỏ card và trang chi tiết khỏi bản build mới, nhưng không xóa file trong Git hoặc thu hồi bản đã được người khác lưu.
 
-Ví dụ dùng font hệ thống hỗ trợ tiếng Việt, không cần tải font ngoài:
+## 6. Mẫu Research hoàn chỉnh
 
-```css
-/* Thay giá trị tương ứng trong khối @theme inline hiện có. */
---font-sans: 'Segoe UI', Arial, sans-serif;
---font-heading: 'Segoe UI', Arial, sans-serif;
-```
+Tạo `content/research/ten-de-tai.md`:
 
-```css
-/* Thay font-family trong khối body hiện có. */
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
-```
+````md
+---
+title: "Tên đề tài nghiên cứu"
+summary: "Câu hỏi nghiên cứu, cách tiếp cận và đóng góp chính trong một đoạn ngắn."
+published: true
+sample: false
+order: 1
+tags: ["Research", "Python"]
+cover: ""
+---
 
-Sửa `.hero h1` để đổi kích thước tên; `h2` cho tiêu đề phần; `h3` cho tiêu đề project/bài. Nếu dùng font riêng, thêm file font vào `public/fonts/`, khai báo `@font-face` và chọn font có ký tự tiếng Việt.
+## Tổng quan
 
-### Khoảng cách và số cột
+Trình bày bối cảnh, mục tiêu và phạm vi của đề tài.
 
-| Muốn chỉnh | Selector |
+## Phương pháp
+
+- Dữ liệu và công cụ sử dụng.
+- Cách tiếp cận chính.
+- Vai trò của bạn.
+
+## Kết quả
+
+Mô tả kết quả đã kiểm chứng và những giới hạn.
+
+| Hạng mục | Mô tả |
 | --- | --- |
-| Chiều rộng tổng thể, lề ngang | `.header, .section, .footer` |
-| Khoảng cách phần đầu và tỷ lệ hai cột | `.hero` |
-| Bỏ độ nghiêng của thẻ giới thiệu | Đổi `transform` của `.profile-panel` thành `none`, kiểm tra cả quy tắc mobile |
-| Khoảng cách giữa các phần | `padding-top`, `padding-bottom` của các section |
-| Số cột và khoảng cách project | `.project-grid` |
-| Chiều rộng và khoảng đệm cửa sổ đọc | `.reading-dialog` |
+| Sản phẩm | Điền sản phẩm hoặc đầu ra của đề tài |
+| Bài học | Điền điều rút ra |
 
-Ví dụ thay quy tắc `.project-grid` để desktop có ba cột:
+## Liên kết
 
-```css
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 25px;
-}
+[Mã nguồn](https://github.com/your-username/your-repository)
+````
+
+Bạn có thể thêm nhiều đường dẫn trong Markdown: mã nguồn, bài báo, DOI, demo, dataset, slide hoặc PDF. Không giới hạn một đường dẫn như phiên bản trước.
+
+## 7. Mẫu Gallery và cách thêm ảnh
+
+1. Tạo thư mục ảnh, ví dụ `public/images/hoi-thao/`.
+2. Chép các ảnh của bạn vào đó, ví dụ `anh-01.jpg`, `anh-02.jpg`.
+3. Tạo `content/gallery/hoi-thao.md` và điền mẫu dưới đây.
+
+```md
+---
+title: "Tên sự kiện hoặc bộ sưu tập"
+summary: "Một vài khoảnh khắc và câu chuyện từ bộ sưu tập."
+published: true
+sample: false
+tags: ["Sự kiện"]
+cover: ""
+images:
+  - src: "/images/hoi-thao/anh-01.jpg"
+    alt: "Mô tả những gì xuất hiện trong ảnh thứ nhất"
+    caption: "Chú thích ảnh thứ nhất"
+  - src: "/images/hoi-thao/anh-02.jpg"
+    alt: "Mô tả những gì xuất hiện trong ảnh thứ hai"
+    caption: "Chú thích ảnh thứ hai"
+---
+
+## Về bộ sưu tập này
+
+Viết vài dòng về bối cảnh và câu chuyện phía sau những bức ảnh.
 ```
 
-Nên thêm hoặc cập nhật quy tắc trong các khối `@media` hiện có để tablet có hai cột, điện thoại một cột:
+- Không điền `cover`: ảnh đầu tiên trong `images` tự trở thành bìa card.
+- Có `cover` riêng: website dùng ảnh đó; nếu ảnh đã nằm trong `images`, trang chi tiết không lặp lại ảnh bìa ở đầu.
+- Không có ảnh: card dùng biểu tượng album. Mục mẫu hiện tại chưa chứa ảnh của bạn.
+- `alt` là mô tả ảnh, bắt buộc với mỗi mục trong `images`; `caption` không bắt buộc.
+- Bấm card để mở album; bấm ảnh trong album để mở ảnh đầy đủ ở tab mới.
+- Thêm ảnh bằng cách thêm mục `- src: ...` vào danh sách. Giữ thụt đầu dòng bằng dấu cách giống mẫu, không dùng tab.
 
-```css
-@media (max-width: 900px) {
-  .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
+Ảnh có đường dẫn bắt đầu bằng `/images/`, **không viết `/public/images/`**. Dùng tên file khớp cả chữ hoa/chữ thường để chạy đúng trên hosting. Nếu ảnh lớn, nên thu nhỏ/nén trước khi đưa lên để trang tải nhanh hơn.
 
-@media (max-width: 640px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-}
+## 8. Mẫu Posts hoàn chỉnh
+
+Tạo `content/posts/bai-viet-dau-tien.md`:
+
+````md
+---
+title: "Bài viết đầu tiên của mình"
+summary: "Một đoạn giới thiệu ngắn để người đọc biết bài viết nói về điều gì."
+published: true
+sample: false
+date: "2026-09-07"
+tags: ["Ghi chép"]
+---
+
+Viết đoạn mở đầu của bạn tại đây.
+
+## Ý đầu tiên
+
+Bạn có thể dùng **chữ đậm**, *chữ nghiêng* và [liên kết](https://example.com).
+
+- Ý chính thứ nhất.
+- Ý chính thứ hai.
+
+## Một ví dụ
+
+```python
+print("Hello, world!")
 ```
 
-CSS hiện có các mốc `1400px`, `900px`, `640px`. Quy tắc mobile có thể ghi đè thay đổi desktop. Giữ hỗ trợ `:focus-visible` và `prefers-reduced-motion` khi sửa hiệu ứng.
+## Điều rút ra
 
-## 8. Chữ viết tắt, ảnh đại diện và favicon
+Viết điều bạn muốn ghi nhớ hoặc chia sẻ cùng người đọc.
+````
 
-### Chữ trên thẻ giới thiệu
+Thời gian đọc được ước tính tự động theo độ dài nội dung; không cần điền `readingTime`. Bài có URL riêng để gửi cho người khác. Thay nội dung mẫu rồi đặt `sample: false` để bỏ nhãn mẫu.
 
-Trong `app/page.tsx`, thay `{profile.name.slice(0, 2)}` bằng chữ mong muốn nếu không muốn dùng hai ký tự đầu. Ví dụ:
+## 9. Markdown hỗ trợ những gì?
 
-```tsx
-<div className="monogram" aria-hidden="true">
-  NA
-  <span>↗</span>
-</div>
-```
+| Nội dung | Cách viết |
+| --- | --- |
+| Tiêu đề phần | `## Tên phần` |
+| Tiêu đề nhỏ | `### Tên mục` |
+| In đậm | `**nội dung**` |
+| In nghiêng | `*nội dung*` |
+| Danh sách | Mỗi dòng bắt đầu bằng `- ` |
+| Danh sách đánh số | Mỗi dòng bắt đầu bằng `1. `, `2. `… |
+| Liên kết | `[Chữ hiển thị](https://example.com)` |
+| Email | `[Gửi email](mailto:you@example.com)` |
+| Ảnh trong nội dung | `![Mô tả ảnh](/images/anh.jpg)` |
+| PDF nội bộ | `[Tải tài liệu](/files/tai-lieu.pdf)` |
+| Trích dẫn | Dòng bắt đầu bằng `> ` |
+| Đường phân cách | Một dòng `---` ở phần thân bài |
 
-### Thay chữ bằng ảnh đại diện — cần sửa giao diện
+Bảng và khối mã cũng được hỗ trợ như các mẫu ở trên. Nên bắt đầu tiêu đề phần trong thân bài bằng `##`, vì tên bài đã là tiêu đề chính của trang.
 
-Hiện chưa có trường `avatar` trong dữ liệu. Để bổ sung ảnh:
+HTML thô và script không được thực thi; website chưa hỗ trợ MDX, công thức LaTeX hoặc nhúng iframe. Code block hiển thị được với font monospace, chưa có tô màu cú pháp chuyên biệt. Dùng đường dẫn bắt đầu bằng `/` cho tài nguyên nội bộ để chúng không bị hiểu tương đối theo trang chi tiết.
 
-1. Đặt ảnh vào `public/images/avatar.jpg` (tạo thư mục `images` nếu chưa có).
-2. Thay **toàn bộ khối** `<div className="monogram" ...>...</div>` trong `app/page.tsx` bằng đoạn sau, không đặt ảnh vào khối còn `aria-hidden="true"`.
-3. Thêm CSS bên dưới vào `app/globals.css`.
+## 10. Hiện/ẩn và cập nhật nội dung cũ
 
-```tsx
-<img
-  className="profile-avatar"
-  src="/images/avatar.jpg"
-  alt={`Ảnh đại diện của ${profile.name}`}
-  width={220}
-  height={220}
-/>
-```
+| Thao tác | Cách làm |
+| --- | --- |
+| Hiện mục | `published: true` |
+| Ẩn mục, giữ nội dung để sửa tiếp | `published: false` |
+| Bỏ nhãn mẫu | `sample: false` |
+| Đẩy mục lên trước | Giảm `order` |
+| Đổi tên hiển thị, giữ URL | Sửa `title`, giữ tên file |
+| Xóa mục | Xóa file `.md`, rồi build và triển khai lại |
+| Ẩn toàn bộ nội dung một trang | Đặt tất cả mục thành `published: false`; trang danh sách vẫn hiện trạng thái chờ nội dung |
 
-```css
-.profile-avatar {
-  display: block;
-  width: min(220px, 100%);
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 50%;
-  align-self: center;
-  margin: 24px 0;
-}
-```
+Dữ liệu cũ trong `content/legacy/portfolio.ts` chỉ được giữ lại để tham khảo. Website mới không đọc file này; sửa nó sẽ không thay đổi giao diện.
 
-Các đoạn bổ sung ảnh trong tài liệu này là hướng dẫn mở rộng, chưa được áp dụng vào website. Thêm riêng file ảnh mà chưa sửa JSX sẽ không làm ảnh xuất hiện. Bìa project hiện cũng dùng chữ, chưa có trường ảnh bìa.
+## 11. Xem thử và cập nhật bản trực tuyến
 
-### Favicon
-
-Thay [`public/favicon.svg`](public/favicon.svg) để đổi biểu tượng trên tab. Nếu dùng `public/favicon.png`, đổi `icons.icon` trong `app/layout.tsx` thành `/favicon.png`. Thay ảnh không tự đổi tên hiển thị trên website.
-
-## 9. Tiêu đề tab, mô tả và ngôn ngữ
-
-Trong [`app/layout.tsx`](app/layout.tsx), metadata hiện dùng:
-
-```ts
-export const metadata: Metadata = {
-  title: `${profile.name} — Portfolio & Blog`,
-  description: profile.intro,
-  icons: { icon: '/favicon.svg' },
-};
-```
-
-Có thể thay `title` và `description` bằng chuỗi riêng nếu muốn khác phần giới thiệu. `lang="vi"` khai báo nội dung tiếng Việt; đổi thành `en` chỉ khi nội dung thực tế chuyển sang tiếng Anh. Đổi `lang` không tự dịch website.
-
-Metadata hiện chưa cấu hình ảnh xem trước khi chia sẻ mạng xã hội. Muốn có ảnh đó cần thêm tài nguyên và cấu hình Open Graph tương ứng.
-
-## 10. Lưu, xem thử và đưa thay đổi lên website
-
-Chạy các lệnh trong thư mục repo. Dùng Node.js đáp ứng trường `engines` trong `package.json` (hiện yêu cầu từ `22.13.0`).
-
-**Lần đầu hoặc khi cần cài lại thư viện:**
+Trong thư mục repo, cài thư viện một lần hoặc sau khi thay đổi dependencies:
 
 ```sh
 npm ci
 ```
 
-**Xem thử trong lúc chỉnh:**
+Xem thử:
 
 ```sh
 npm run dev
 ```
 
-Mở địa chỉ mà lệnh in ra. Lưu file rồi xem thay đổi; dừng máy chủ bằng `Ctrl+C` khi xong.
+Mở địa chỉ được in ra. Thêm, sửa hoặc xóa Markdown sẽ làm bản xem thử tải lại. Dừng bằng `Ctrl+C` khi xong.
 
-**Kiểm tra trước khi triển khai:**
+Kiểm tra trước khi triển khai:
 
 ```sh
 npx tsc --noEmit --incremental false
+npm run test:content
 npm run build
 ```
 
-Bản website tĩnh được tạo trong `dist/client`. Không chỉnh nội dung trực tiếp trong thư mục này vì lần build tiếp theo sẽ ghi đè. Với cấu hình tĩnh hiện tại, dùng `npm run dev` để xem thử; script `npm start` còn trỏ đến cấu hình Worker và không phải lệnh xem bản xuất tĩnh.
+Bản tĩnh nằm trong `dist/client`. Lệnh build tự chạy bước hoàn tất đường dẫn và kiểm tra ảnh/tài liệu/liên kết nội bộ bị thiếu. Không sửa trực tiếp file trong `dist`.
 
-Kiểm tra các phần vừa thay: tên không tràn, liên kết mở đúng địa chỉ, project đã ẩn không còn trên trang, nội dung cửa sổ đọc đầy đủ, menu hoạt động và bố cục điện thoại đọc được.
+- **GitHub Pages:** sau khi repo đã bật Pages dùng GitHub Actions, mỗi lần đẩy thay đổi lên `main`, workflow hiện có sẽ kiểm tra và tạo lại website. Bạn chỉ cần thêm/sửa Markdown và tải ảnh vào đúng thư mục trong repo; không phải lập trình lại giao diện.
+- **Sites:** cần lưu và triển khai phiên bản mới của cùng website. Lưu file trên máy hoặc đẩy lên GitHub không tự cập nhật bản Sites.
 
-**Cập nhật bản trực tuyến:**
+Website tĩnh không lưu nội dung mới từ một biểu mẫu trên trang. Quy trình bạn đã chọn là **file Markdown + mẫu điền sẵn**, chưa có trang quản trị trực tuyến.
 
-- **GitHub Pages:** workflow hiện tại ở `.github/workflows/deploy.yml` chạy khi đẩy lên `main` hoặc kích hoạt thủ công. Cần cấu hình Pages sử dụng GitHub Actions trong repo. Workflow build và lấy `dist/client` làm nội dung triển khai; không cần đẩy thư mục này lên Git.
-- **Sites:** bản đang trực tuyến chỉ thay đổi khi lưu và triển khai một phiên bản mới. Lưu file trên máy hoặc đẩy lên GitHub không tự cập nhật bản Sites.
+## 12. Tùy chỉnh giao diện — nếu cần
 
-Hướng dẫn đường dẫn ảnh bắt đầu bằng `/` dành cho website ở gốc tên miền như repo hiện tại. Nếu chuyển sang website trong thư mục con, cần điều chỉnh đường dẫn nền và tài nguyên tương ứng.
+Việc cập nhật nội dung thường ngày không cần phần này.
 
-## 11. Lỗi thường gặp và giới hạn hiện tại
-
-| Hiện tượng | Cách kiểm tra |
+| Phần muốn đổi | Nơi chỉnh |
 | --- | --- |
-| Project/bài viết không xuất hiện | Kiểm tra `published: true`, lưu file và đúng mảng dữ liệu |
-| Project xuất hiện sai vị trí | Kiểm tra thứ tự trong mảng, kể cả các mục đang ẩn |
-| Đã sửa nhưng trang trực tuyến vẫn cũ | Build và triển khai lại đúng nơi đang xem |
-| Vẫn còn nhãn “Mẫu” | Đặt `example: false` |
-| Không thấy nút mở demo/repository | Kiểm tra `url` có `http://` hoặc `https://` |
-| Website báo lỗi sau khi thêm nội dung | Kiểm tra dấu phẩy giữa các mục, dấu nháy và dấu `]`/`}`; chạy kiểm tra TypeScript |
-| Có dấu nháy đơn trong câu | Dùng chuỗi nháy kép, ví dụ `"Mình đang đọc Developer's Guide."` |
-| Tiêu đề quá dài trên điện thoại | Rút gọn chữ hoặc chỉnh kích thước và ngắt dòng trong CSS mobile |
-| Chữ Markdown hiện nguyên dấu `**` | Nội dung bài hiện là văn bản thuần, chưa có trình đọc Markdown |
-| Ảnh không xuất hiện | Kiểm tra ảnh trong `public`, đúng chữ hoa/thường, và JSX đã dùng đường dẫn tương ứng |
-| Menu bấm vào không đến nội dung | Kiểm tra đích `href="#..."` khớp với `id` của section |
+| Màu nền, chữ, liên kết, viền | Các biến trong `:root` của `app/globals.css` |
+| Font chính | `body`, `--font-sans`, `--font-heading` |
+| Chiều rộng toàn trang | `--content-width` |
+| Độ rộng sidebar/khoảng cách hai cột | `.site-layout` |
+| Kích thước ảnh đại diện | `.profile-photo`, `.profile-initials` và các quy tắc mobile |
+| Số cột card | `.collection-grid` và các khối `@media` |
+| Nền bìa Gallery khi chưa có ảnh | `.entry-cover` |
+| Menu About/Research/Gallery/Posts | `components/site-nav.tsx` |
+| Tiêu đề Research Interests/Background/Contact | `app/page.tsx` |
+| Chữ cố định trong footer | `app/layout.tsx` |
+| Favicon | `public/favicon.svg` |
 
-Trong file TypeScript, dùng dấu nháy thẳng `'` hoặc `"`, không dùng dấu nháy cong để bao chuỗi. `true`/`false` là giá trị boolean, không viết thành `'true'`/`'false'`. Không đặt trùng `id` giữa các mục trong cùng danh sách.
+Màu chính hiện tại:
 
-Website hiện chưa có trang quản trị, đăng nhập để viết bài, tải repository tự động, ảnh bìa theo project, Markdown/MDX, URL riêng từng bài, tìm kiếm hoặc bình luận. Những phần đó cần thêm chức năng; không thể bật chỉ bằng một trường cấu hình đang có.
+```css
+:root {
+  --background: #fff;
+  --foreground: #343b43;
+  --muted: #65707d;
+  --accent: #286780;
+  --border: #e5e8ec;
+  --surface: #f5f7f9;
+  --content-width: 1240px;
+}
+```
+
+Một số màu hover, viền card và nền ảnh được đặt trực tiếp trong CSS; muốn thay toàn bộ bảng màu cần chỉnh cả các quy tắc tương ứng. Website hiện chỉ có giao diện sáng.
+
+Các mục menu là liên kết đến trang riêng. Nếu đổi chữ trên menu, giữ nguyên các đường dẫn `/`, `/research/`, `/gallery/`, `/posts/` để khớp cơ chế tạo trang. Việc thêm một **collection mới ngoài ba loại đang có** cần sửa cấu trúc; thêm mục trong ba collection hiện có thì không.
+
+## 13. Lỗi thường gặp
+
+| Hiện tượng | Cách xử lý |
+| --- | --- |
+| Thêm file nhưng không thấy card | Kiểm tra đúng thư mục, đuôi `.md`, tên không bắt đầu `_`, và `published: true` |
+| Báo thiếu YAML | Giữ phần thông tin giữa hai dòng `---` ở đầu file collection |
+| Báo lỗi `title` hoặc `summary` | Hai trường này cần có giá trị không rỗng khi xuất bản |
+| Báo lỗi `date` | Dùng ngày thực dạng `"YYYY-MM-DD"`, hoặc để `""` |
+| Báo lỗi `published` | Viết `true`/`false` không có dấu nháy |
+| Báo YAML không hợp lệ | Kiểm tra thụt dòng, dấu nháy và tên trường trùng; chú ý các giá trị có dấu `:` |
+| Ảnh không hiện / build báo thiếu tài nguyên | Chép ảnh vào `public/images`, dùng `/images/...`, kiểm tra chính xác tên file |
+| Card đã có nhưng thứ tự chưa đúng | So sánh `order`; chỉ khi bằng nhau mới xét ngày |
+| URL cũ không mở được | Kiểm tra đã đổi tên file, xóa mục hoặc chuyển `published` thành `false` chưa |
+| Sửa trên máy nhưng bản online chưa đổi | Build và triển khai lại đúng nơi đang xem |
+| JSON báo lỗi sau khi sửa hồ sơ | Dùng nháy kép, không thêm comment hoặc dấu phẩy ở cuối mục cuối cùng |
+
+Giữ lại bản sao hoặc lịch sử Git khi chỉnh nội dung. `published: false` không phải cơ chế giữ bí mật cho file nằm trong repository công khai.
