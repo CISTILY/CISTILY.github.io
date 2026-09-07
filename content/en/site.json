@@ -3,10 +3,10 @@
   "role": "Undergraduate student",
   "affiliation": "University of Science, VNU-HCM",
   "location": "Ho Chi Minh City, Vietnam",
-  "avatar": "/images/avatar.jpg",
+  "avatar": "public/images/avatar.jpg",
   "avatarAlt": "",
   "email": "lebathanh.nv@gmail.com",
-  "cv": "/files/cv.pdf",
+  "cv": "public/files/cv.pdf",
   "description": "Personal website · Research, gallery & posts.",
   "socials": [
     {
