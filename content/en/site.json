@@ -3,10 +3,10 @@
   "role": "Undergraduate student",
   "affiliation": "University of Science, VNU-HCM",
   "location": "Ho Chi Minh City, Vietnam",
-  "avatar": "C:/Users/lebat/Documents/Github/CISTILY.github.io/public/images/avatar.jpg",
-  "avatarAlt": "",
+  "avatar": "/images/avatar.jpg",
+  "avatarAlt": "Portrait of Nguyễn Văn Lê Bá Thành",
   "email": "lebathanh.nv@gmail.com",
-  "cv": "C:/Users/lebat/Documents/Github/CISTILY.github.io/public/files/cv.pdf",
+  "cv": "/files/cv.pdf",
   "description": "Personal website · Research, gallery & posts.",
   "socials": [
     {

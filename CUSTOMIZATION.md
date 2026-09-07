@@ -48,6 +48,8 @@ Thay URL bằng hồ sơ thật. Thêm các mục khác vào mảng `socials` đ
 
 Để dùng ảnh đại diện hoặc CV, thêm file thật vào `public` rồi mới điền đường dẫn. Bước build kiểm tra các tài nguyên nội bộ bị thiếu.
 
+Ví dụ: đặt ảnh ở `public/images/avatar.jpg` và CV ở `public/files/cv.pdf`, rồi điền `"avatar": "/images/avatar.jpg"` và `"cv": "/files/cv.pdf"` trong `content/vi/site.json` và `content/en/site.json`. Đường dẫn trên website bắt đầu bằng `/`, không gồm `public` hoặc đường dẫn trên máy như `C:/Users/...`. Khi cập nhật, bạn có thể thay file cùng tên để giữ nguyên liên kết.
+
 Thông tin liên hệ hiển thị trong sidebar, lấy từ `email` và `socials` trong `site.json`.
 
 ## 3. Điền trang About
