@@ -1,6 +1,6 @@
 ---
 title: "Hybrid Anomaly-Supervised Learning for Out-of-Distribution AI Code Detection"
-summary: "Exploring the potential of anomaly-based detection for OOD AI Code Detection in SemEval-2026 Task 13, Subtask A"
+summary: "Our paper is published at KSE 2026, combines anomaly detection and supervised learning to identify AI-generated code, achieving 0.6857 macro-F1 on the SemEval-2026 Task 13 final test set."
 published: true
 sample: False
 order: 2
@@ -52,3 +52,4 @@ These findings were checked against the paper; the experiments were not independ
 - Full paper: Link to be added when available.
 - Github: https://github.com/Namronaldo08102004/ML_Code_Detector
 - Presentation: Link to be added when available.
+- KSE 2026 conference program: https://kse2026.kse-conferences.org/program/
