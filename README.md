@@ -11,7 +11,8 @@ Website hỗ trợ **VI / EN**: bản Việt ở `/`, bản Anh ở `/en/`. Xem 
 | Tên, ảnh đại diện, chức danh, nơi làm việc, liên kết | [`content/vi/site.json`](content/vi/site.json) |
 | Research Interests | [`content/vi/about/research-interests.md`](content/vi/about/research-interests.md) |
 | Background và học vấn | [`content/vi/about/background.md`](content/vi/about/background.md) |
-| Research / dự án | [`content/vi/research/`](content/vi/research/) |
+| Research | [`content/vi/research/`](content/vi/research/) |
+| Project / dự án | [`content/vi/projects/`](content/vi/projects/) |
 | Gallery / album ảnh | [`content/vi/gallery/`](content/vi/gallery/) |
 | Posts / blog | [`content/vi/posts/`](content/vi/posts/) |
 | Ảnh, CV hoặc tài liệu | [`public/images/`](public/images/), [`public/files/`](public/files/) |
@@ -35,6 +36,7 @@ Có thể tạo bản nháp từ mẫu bằng lệnh tùy chọn:
 
 ```sh
 npm run new:research -- ten-de-tai
+npm run new:project -- ten-du-an
 npm run new:gallery -- ten-album
 npm run new:post -- ten-bai-viet
 ```

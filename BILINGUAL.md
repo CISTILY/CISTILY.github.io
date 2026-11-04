@@ -4,7 +4,7 @@ Website có nút **VI / EN** trên thanh điều hướng. Hai phiên bản dùn
 
 ## 1. Nội dung của mỗi phiên bản nằm ở đâu?
 
-Nội dung tiếng Việt nằm trong `content/vi/`, tiếng Anh trong `content/en/`. Hai thư mục có cùng cấu trúc: `site.json`, `ui.json`, `about/`, `research/`, `gallery/`, `posts/`.
+Nội dung tiếng Việt nằm trong `content/vi/`, tiếng Anh trong `content/en/`. Hai thư mục có cùng cấu trúc: `site.json`, `ui.json`, `about/`, `research/`, `projects/`, `gallery/`, `posts/`.
 
 | Phần cần chỉnh | Tiếng Việt | English |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ Nội dung tiếng Việt nằm trong `content/vi/`, tiếng Anh trong `content/
 | Nhãn menu, nút, thông báo, tiêu đề các phần About | [`content/vi/ui.json`](content/vi/ui.json) | [`content/en/ui.json`](content/en/ui.json) |
 | Hướng nghiên cứu | [`content/vi/about/research-interests.md`](content/vi/about/research-interests.md) | [`content/en/about/research-interests.md`](content/en/about/research-interests.md) |
 | Học vấn và kinh nghiệm | [`content/vi/about/background.md`](content/vi/about/background.md) | [`content/en/about/background.md`](content/en/about/background.md) |
-| Nghiên cứu và dự án | [`content/vi/research/`](content/vi/research/) | [`content/en/research/`](content/en/research/) |
+| Nghiên cứu | [`content/vi/research/`](content/vi/research/) | [`content/en/research/`](content/en/research/) |
 | Album ảnh | [`content/vi/gallery/`](content/vi/gallery/) | [`content/en/gallery/`](content/en/gallery/) |
 | Bài viết | [`content/vi/posts/`](content/vi/posts/) | [`content/en/posts/`](content/en/posts/) |
 
@@ -26,6 +26,7 @@ Thông tin cá nhân đã có được giữ lại. Bản Anh ban đầu dùng c
 | --- | --- | --- |
 | Giới thiệu / About | `/` | `/en/` |
 | Nghiên cứu / Research | `/research/` | `/en/research/` |
+| Dự án / Project | `/projects/` | `/en/projects/` |
 | Thư viện ảnh / Gallery | `/gallery/` | `/en/gallery/` |
 | Bài viết / Posts | `/posts/` | `/en/posts/` |
 | Một bài cụ thể | `/posts/ten-bai/` | `/en/posts/ten-bai/` |
@@ -94,7 +95,7 @@ Write your English content here.
 
 Sau khi lưu, bản xem thử tự tải lại. Khi đưa lên hosting, chạy build và triển khai như trước. Card và trang chi tiết của mỗi ngôn ngữ tự được tạo; không sửa code giao diện hoặc danh sách route.
 
-Research và Gallery dùng cách tương tự: đổi `posts` thành `research` hoặc `gallery` ở cả hai đường dẫn.
+Research, Project và Gallery dùng cách tương tự: đổi `posts` thành `research`, `projects` hoặc `gallery` ở cả hai đường dẫn.
 
 ## 4. Tạo file bằng lệnh — tùy chọn
 
@@ -106,8 +107,8 @@ npm run new:post -- my-first-post
 npm run new:post -- my-first-post en
 
 # Research
-npm run new:research -- my-project vi
-npm run new:research -- my-project en
+npm run new:project -- my-project vi
+npm run new:project -- my-project en
 
 # Gallery
 npm run new:gallery -- my-album vi

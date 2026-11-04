@@ -4,7 +4,7 @@ import MarkdownIt from 'markdown-it';
 import { parseDocument } from 'yaml';
 import type { Locale } from './locale';
 
-export const collections = ['research', 'gallery', 'posts'] as const;
+export const collections = ['research', 'projects', 'gallery', 'posts'] as const;
 export type Collection = (typeof collections)[number];
 export type EntryImage = { src: string; alt: string; caption: string };
 export type Entry = {

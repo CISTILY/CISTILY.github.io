@@ -10,6 +10,7 @@
     "build": "node scripts/build.mjs",
     "postbuild": "node scripts/finalize-export.mjs",
     "test:content": "node --experimental-strip-types --test scripts/content.test.mjs",
+    "new:project": "node scripts/new-content.mjs projects",
     "new:research": "node scripts/new-content.mjs research",
     "new:gallery": "node scripts/new-content.mjs gallery",
     "new:post": "node scripts/new-content.mjs posts",

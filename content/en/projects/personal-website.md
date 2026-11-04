@@ -10,11 +10,11 @@ cover: ""
 
 ## Overview
 
-This website brings together a personal profile, research, photo albums and posts. A profile sidebar accompanies four pages: **About**, **Research**, **Gallery** and **Posts**.
+This website brings together a personal profile, research, photo albums and posts. A profile sidebar accompanies five pages: **About**, **Research**, **Project**, **Gallery** and **Posts**.
 
 ## Organization
 
-- Each research project, gallery album or post is a Markdown file.
+- Each research entry, project, gallery album or post is a Markdown file.
 - Adding a file creates its summary card and detail page automatically.
 - Entries can be published, hidden and reordered independently.
 - Each detail page has its own shareable URL.

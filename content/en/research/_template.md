@@ -1,6 +1,6 @@
 ---
-title: "Research or project title"
-summary: "Summarize the project in one or two sentences."
+title: "Research title"
+summary: "Summarize the research in one or two sentences."
 published: false
 sample: false
 date: ""

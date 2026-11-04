@@ -14,7 +14,7 @@ export function languageTarget(
   const target = localePath(locale, clean === '/' ? '/' : clean + '/');
   if (availablePaths.includes(target)) return { href: target, missing: false };
   const collection = clean.split('/')[1];
-  const fallback = ['research', 'gallery', 'posts'].includes(collection)
+  const fallback = ['research', 'projects', 'gallery', 'posts'].includes(collection)
     ? `/${collection}/`
     : '/';
   return { href: localePath(locale, fallback), missing: true };

@@ -1,5 +1,5 @@
 ---
-title: "Tên nghiên cứu hoặc dự án"
+title: "Tên nghiên cứu"
 summary: "Tóm tắt trong một đến hai câu."
 published: false
 sample: false

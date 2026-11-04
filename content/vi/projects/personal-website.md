@@ -10,11 +10,11 @@ cover: ""
 
 ## Tổng quan
 
-Website tập hợp hồ sơ cá nhân, nghiên cứu, album ảnh và bài viết. Bố cục có thanh hồ sơ bên trái và bốn mục **About**, **Research**, **Gallery**, **Posts**.
+Website tập hợp hồ sơ cá nhân, nghiên cứu, album ảnh và bài viết. Bố cục có thanh hồ sơ bên trái và năm mục **About**, **Research**, **Project**, **Gallery**, **Posts**.
 
 ## Cách tổ chức
 
-- Mỗi mục Research, Gallery hoặc Posts là một file Markdown.
+- Mỗi mục Research, Project, Gallery hoặc Posts là một file Markdown.
 - Thêm file để tự tạo thẻ tóm tắt và trang chi tiết.
 - Có thể chọn hiện hoặc ẩn từng mục và điều chỉnh thứ tự.
 - Mỗi trang chi tiết có đường dẫn riêng để chia sẻ.

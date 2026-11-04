@@ -63,7 +63,7 @@ export function SiteDocument({
               © {new Date().getFullYear()} {site.name}
             </span>
             <span>
-              {ui.nav.research} · {ui.nav.gallery} · {ui.nav.posts}
+              {ui.nav.research} · {ui.nav.projects} · {ui.nav.gallery} · {ui.nav.posts}
             </span>
             <a href="#main">{ui.backTop}</a>
           </div>

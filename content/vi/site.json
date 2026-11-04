@@ -17,7 +17,11 @@
   "pages": {
     "research": {
       "title": "Nghiên cứu",
-      "description": "Các đề tài, dự án và hướng nghiên cứu."
+      "description": "Các đề tài, phương pháp và kết quả nghiên cứu."
+    },
+    "projects": {
+      "title": "Dự án",
+      "description": "Các ứng dụng, công cụ và sản phẩm mình xây dựng."
     },
     "gallery": {
       "title": "Thư viện ảnh",

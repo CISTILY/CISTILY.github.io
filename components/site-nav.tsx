@@ -16,6 +16,7 @@ export function SiteNav({
   const items = [
     ['/', ui.nav.about],
     ['/research/', ui.nav.research],
+    ['/projects/', ui.nav.projects],
     ['/gallery/', ui.nav.gallery],
     ['/posts/', ui.nav.posts],
   ];

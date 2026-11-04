@@ -3,7 +3,7 @@ title: "Hybrid Anomaly-Supervised Learning for Out-of-Distribution AI Code Detec
 summary: "Combines anomaly detection and supervised learning to identify AI-generated code, achieving 0.6857 macro-F1 on the SemEval-2026 Task 13 final test set."
 published: true
 sample: False
-order: 2
+order: 1
 tags: ["KSE 2026", "Machine Learning", "AI-generated code detection", "Out-of-distribution", "Generalisation", "Anomaly detection", "Stylometry", "Code forensics"]
 ---
 

@@ -545,7 +545,8 @@ h1 {
   font-size: 14px;
   color: var(--accent);
 }
-.research-card {
+.research-card,
+.projects-card {
   border-top: 3px solid #7798aa;
 }
 .posts-card {

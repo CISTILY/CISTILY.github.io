@@ -11,7 +11,7 @@ Website có bốn trang **About, Research, Gallery, Posts**, với hồ sơ cá 
 | Điền tên, chức danh, cơ quan, địa điểm, email, liên kết | [`content/vi/site.json`](content/vi/site.json) |
 | Điền Research Interests | [`content/vi/about/research-interests.md`](content/vi/about/research-interests.md) |
 | Viết Background, học vấn, kinh nghiệm | [`content/vi/about/background.md`](content/vi/about/background.md) |
-| Thêm nghiên cứu hoặc dự án | Thêm file `.md` trong [`content/vi/research/`](content/vi/research/) |
+| Thêm nghiên cứu | Thêm file `.md` trong [`content/vi/research/`](content/vi/research/) |
 | Thêm album ảnh | Thêm file `.md` trong [`content/vi/gallery/`](content/vi/gallery/) |
 | Thêm bài viết | Thêm file `.md` trong [`content/vi/posts/`](content/vi/posts/) |
 | Đưa ảnh lên | Thêm ảnh trong [`public/images/`](public/images/) |
@@ -36,7 +36,7 @@ Mở `content/vi/site.json`. Giữ nguyên dấu ngoặc, dấu phẩy và **d�
 | `cv` | Đường dẫn PDF, ví dụ `/files/cv.pdf`; `""` để ẩn |
 | `description` | Mô tả chung dùng trong metadata |
 | `socials` | Danh sách liên kết bên ngoài; mỗi mục gồm `label` và `url` |
-| `pages.research`, `pages.gallery`, `pages.posts` | Tiêu đề và mô tả của từng trang danh sách |
+| `pages.research`, `pages.projects`, `pages.gallery`, `pages.posts` | Tiêu đề và mô tả của từng trang danh sách |
 
 Ví dụ một mục trong `socials`:
 
@@ -91,7 +91,7 @@ Thay các chỗ trong ngoặc bằng thông tin thật. Không cần giữ các 
 
 ### Cách dùng mẫu có sẵn
 
-1. Mở thư mục cần thêm: `content/vi/research`, `content/vi/gallery` hoặc `content/vi/posts`.
+1. Mở thư mục cần thêm: `content/vi/research`, `content/vi/projects`, `content/vi/gallery` hoặc `content/vi/posts`.
 2. Sao chép file `_template.md` ngay trong thư mục đó.
 3. Đổi tên bản sao, ví dụ `ten-de-tai.md`, `hoi-thao-2026.md`, `ghi-chep-dau-tien.md`.
 4. Điền các trường đầu file và viết nội dung ở bên dưới.
@@ -114,6 +114,7 @@ Trong thư mục repo:
 
 ```sh
 npm run new:research -- ten-de-tai
+npm run new:project -- ten-du-an
 npm run new:gallery -- hoi-thao-2026
 npm run new:post -- ghi-chep-dau-tien
 ```
@@ -371,7 +372,7 @@ Màu chính hiện tại:
 
 Một số màu hover, viền card và nền ảnh được đặt trực tiếp trong CSS; muốn thay toàn bộ bảng màu cần chỉnh cả các quy tắc tương ứng. Website hiện chỉ có giao diện sáng.
 
-Các mục menu là liên kết đến trang riêng. Nếu đổi chữ trên menu, giữ nguyên các đường dẫn `/`, `/research/`, `/gallery/`, `/posts/` để khớp cơ chế tạo trang. Việc thêm một **collection mới ngoài ba loại đang có** cần sửa cấu trúc; thêm mục trong ba collection hiện có thì không.
+Các mục menu là liên kết đến trang riêng. Nếu đổi chữ trên menu, giữ nguyên các đường dẫn `/`, `/research/`, `/projects/`, `/gallery/`, `/posts/` để khớp cơ chế tạo trang. Việc thêm một **collection mới ngoài bốn loại đang có** cần sửa cấu trúc; thêm mục trong bốn collection hiện có thì không.
 
 ## 13. Lỗi thường gặp
 

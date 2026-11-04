@@ -25,7 +25,11 @@
   "pages": {
     "research": {
       "title": "Research",
-      "description": "Research projects, questions and explorations."
+      "description": "Research questions, methods and findings."
+    },
+    "projects": {
+      "title": "Project",
+      "description": "Applications, tools and things I build."
     },
     "gallery": {
       "title": "Gallery",

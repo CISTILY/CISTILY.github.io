@@ -2,14 +2,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 const [collection, slug, locale = 'vi', extra] = process.argv.slice(2);
 if (
-  !['research', 'gallery', 'posts'].includes(collection) ||
+  !['research', 'projects', 'gallery', 'posts'].includes(collection) ||
   !slug ||
   !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) ||
   !['vi', 'en'].includes(locale) ||
   extra
 ) {
   console.error(
-    'Dùng: npm run new:research -- ten-muc [vi|en] (hoặc new:gallery / new:post). Tên chỉ gồm chữ thường không dấu, số và dấu gạch ngang.',
+    'Dùng: npm run new:research -- ten-muc [vi|en] (hoặc new:project / new:gallery / new:post). Tên chỉ gồm chữ thường không dấu, số và dấu gạch ngang.',
   );
   process.exit(1);
 }
