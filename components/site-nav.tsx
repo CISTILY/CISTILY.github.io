@@ -18,14 +18,14 @@ export function SiteNav({
     ['/research/', ui.nav.research],
     ['/projects/', ui.nav.projects],
     ['/gallery/', ui.nav.gallery],
-    ['/posts/', ui.nav.posts],
+    ['/blog/', ui.nav.posts],
   ];
   return (
     <div className="site-controls">
       <nav className="site-nav" aria-label={ui.navLabel}>
         {items.map(([path, label]) => {
           const href = localePath(locale, path);
-          const normalized = pathname.replace(/\/$/, '') || '/';
+          const normalized = pathname.replace(/\/posts(?=\/|$)/, '/blog').replace(/\/$/, '') || '/';
           const base = href.replace(/\/$/, '') || '/';
           const active =
             path === '/'

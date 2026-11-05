@@ -1,10 +1,10 @@
-import { collections, getEntriesForLocale } from '@/lib/content';
+import { routeCollections, sourceCollection, getEntriesForLocale } from '@/lib/content';
 import { DetailContent, detailMetadata } from '@/components/content-pages';
 type Props = { params: Promise<{ collection: string; slug: string }> };
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return collections.flatMap((collection) =>
-    getEntriesForLocale(collection, 'en').map((entry) => ({
+  return routeCollections.flatMap((collection) =>
+    getEntriesForLocale(sourceCollection(collection) as 'posts' | 'research' | 'projects' | 'gallery', 'en').map((entry) => ({
       collection,
       slug: entry.slug,
     })),

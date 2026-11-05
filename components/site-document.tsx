@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { SiteNav } from '@/components/site-nav';
 import { ProfileSidebar } from '@/components/profile-sidebar';
-import { collections, getEntriesForLocale } from '@/lib/content';
+import { routeCollections, sourceCollection, type Collection, getEntriesForLocale } from '@/lib/content';
 import { getSite, getUI } from '@/lib/i18n';
 import { locales, localePath, type Locale } from '@/lib/locale';
 import '@/app/globals.css';
@@ -29,9 +29,9 @@ export function SiteDocument({
     ui = getUI(locale);
   const availablePaths = locales.flatMap((language) => [
     localePath(language),
-    ...collections.flatMap((collection) => [
+    ...routeCollections.flatMap((collection) => [
       localePath(language, `/${collection}/`),
-      ...getEntriesForLocale(collection, language).map((entry) =>
+      ...getEntriesForLocale(sourceCollection(collection) as Collection, language).map((entry) =>
         localePath(language, `/${collection}/${entry.slug}/`),
       ),
     ]),

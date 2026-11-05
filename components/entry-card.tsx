@@ -11,7 +11,7 @@ export function EntryCard({ entry, locale }: { entry: Entry; locale: Locale }) {
     <article className={`entry-card ${entry.collection}-card`}>
       <a
         className="entry-link"
-        href={localePath(locale, `/${entry.collection}/${entry.slug}/`)}
+        href={localePath(locale, `/${entry.collection === 'posts' ? 'blog' : entry.collection}/${entry.slug}/`)}
       >
         {(entry.cover || isGallery) && (
           <div className="entry-cover">

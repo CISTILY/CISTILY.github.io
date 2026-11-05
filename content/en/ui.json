@@ -1,5 +1,5 @@
 {
-  "nav": { "about": "About", "research": "Research", "projects": "Project", "gallery": "Gallery", "posts": "Posts" },
+  "nav": { "about": "About", "research": "Research", "projects": "Project", "gallery": "Gallery", "posts": "Blog" },
   "sections": { "researchInterests": "Research Interests", "background": "Background", "contact": "Contact" },
   "aboutKicker": "A LITTLE ABOUT ME",
   "navLabel": "Main navigation",

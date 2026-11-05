@@ -5,6 +5,8 @@ import { parseDocument } from 'yaml';
 import type { Locale } from './locale';
 
 export const collections = ['research', 'projects', 'gallery', 'posts'] as const;
+export const routeCollections = [...collections, 'blog'] as const;
+export const sourceCollection = (value: string) => value === 'blog' ? 'posts' : value;
 export type Collection = (typeof collections)[number];
 export type EntryImage = { src: string; alt: string; caption: string };
 export type Entry = {

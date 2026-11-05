@@ -1,4 +1,4 @@
-import { collections } from '@/lib/content';
+import { routeCollections } from '@/lib/content';
 import {
   CollectionContent,
   collectionMetadata,
@@ -6,7 +6,7 @@ import {
 type Props = { params: Promise<{ collection: string }> };
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return collections.map((collection) => ({ collection }));
+  return routeCollections.map((collection) => ({ collection }));
 }
 export async function generateMetadata({ params }: Props) {
   return collectionMetadata((await params).collection, 'vi');

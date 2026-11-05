@@ -25,6 +25,21 @@
   --surface: #f5f7f9;
   --content-width: 1240px;
 }
+.blog-management {
+  margin: 0 0 28px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.blog-management summary { cursor: pointer; font-weight: 600; }
+.blog-management summary span { color: var(--muted); font-size: 12px; margin-left: 12px; }
+.blog-management p { font-size: 14px; line-height: 1.7; margin: 14px 0 0; color: var(--muted); }
+.blog-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.blog-actions a { padding: 9px 14px; border: 1px solid var(--border); border-radius: 5px; background: white; color: var(--accent); font-weight: 600; font-size: 14px; }
+.blog-actions a:hover { border-color: currentColor; }
+.blog-actions .blog-delete { color: #a33333; }
+.blog-management :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .site-controls {
   display: flex;
   align-self: stretch;

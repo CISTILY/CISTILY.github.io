@@ -12,6 +12,27 @@ import {
   formatDate,
 } from '../lib/content.ts';
 import { localePath, languageTarget } from '../lib/locale.ts';
+import { blogLinks } from '../lib/blog.ts';
+
+test('blog management targets the matching Markdown locale and safely encodes templates', () => {
+  const template = '---\ntitle: "Tiếng Việt & #notes"\npublished: false\n---\n';
+  for (const locale of ['vi', 'en']) {
+    const links = blogLinks(locale, template, 'first-note');
+    const create = new URL(links.create);
+    assert.equal(create.pathname, `/CISTILY/CISTILY.github.io/new/main/content/${locale}/posts`);
+    assert.equal(create.searchParams.get('value'), template);
+    assert.ok(links.edit.endsWith(`/edit/main/content/${locale}/posts/first-note.md`));
+    assert.ok(links.delete.endsWith(`/delete/main/content/${locale}/posts/first-note.md`));
+  }
+  assert.equal(blogLinks('vi', template).delete, undefined);
+  assert.throws(() => blogLinks('vi', template, '../secret'), /Invalid/);
+});
+
+test('blog language switching supports detail pages and missing translations', () => {
+  const paths = ['/blog/', '/en/blog/', '/blog/shared/', '/en/blog/shared/'];
+  assert.deepEqual(languageTarget('/blog/shared', 'en', paths), { href: '/en/blog/shared/', missing: false });
+  assert.deepEqual(languageTarget('/blog/vi-only/', 'en', paths), { href: '/en/blog/', missing: true });
+});
 
 const entry = (metadata = '', body = '## Nội dung\n\nMột đoạn **in đậm**.') =>
   `---\ntitle: "Ví dụ"\nsummary: "Tóm tắt"\npublished: true\n${metadata}\n---\n${body}`;

@@ -6,10 +6,12 @@ import {
   getEntriesForLocale,
   isCollection,
   formatDate,
+  sourceCollection,
 } from '@/lib/content';
 import { getSite, getUI } from '@/lib/i18n';
 import { localePath, type Locale } from '@/lib/locale';
 import { EntryCard } from '@/components/entry-card';
+import { BlogActions } from '@/components/blog-actions';
 
 export function AboutContent({ locale }: { locale: Locale }) {
   const ui = getUI(locale);
@@ -49,6 +51,7 @@ export function collectionMetadata(
   collection: string,
   locale: Locale,
 ): Metadata {
+  collection = sourceCollection(collection);
   if (!isCollection(collection)) notFound();
   return {
     title: getSite(locale).pages[collection].title,
@@ -62,6 +65,7 @@ export function CollectionContent({
   collection: string;
   locale: Locale;
 }) {
+  collection = sourceCollection(collection);
   if (!isCollection(collection)) notFound();
   const entries = getEntriesForLocale(collection, locale),
     ui = getUI(locale),
@@ -73,6 +77,7 @@ export function CollectionContent({
         <h1>{page.title}</h1>
         {page.description && <p>{page.description}</p>}
       </header>
+      {collection === 'posts' && <BlogActions locale={locale} />}
       <div className="collection-bar">
         <span>{ui.collectionLabels[collection]}</span>
         <span>
@@ -99,6 +104,7 @@ export function getLocalizedEntry(
   slug: string,
   locale: Locale,
 ) {
+  collection = sourceCollection(collection);
   if (!isCollection(collection)) notFound();
   const entry = getEntriesForLocale(collection, locale).find(
     (item) => item.slug === slug,
@@ -126,7 +132,7 @@ export function DetailContent({
   const entry = getLocalizedEntry(collection, slug, locale),
     ui = getUI(locale);
   const title = getSite(locale).pages[entry.collection].title;
-  const back = localePath(locale, `/${entry.collection}/`);
+  const back = localePath(locale, `/${entry.collection === 'posts' ? 'blog' : entry.collection}/`);
   const showCover =
     entry.cover && !entry.images.some((image) => image.src === entry.cover);
   return (
@@ -156,6 +162,7 @@ export function DetailContent({
           )}
         </div>
       </header>
+      {entry.collection === 'posts' && <BlogActions locale={locale} slug={entry.slug} />}
       {showCover && (
         <figure className="detail-cover">
           <img
