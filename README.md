@@ -1,6 +1,6 @@
 # CISTILY — Academic personal website
 
-Blog riêng ở `/blog/` và `/en/blog/`, truy cập từ menu **Blog**. Các nút **Thêm / Sửa / Xóa** trong mục **Quản lý blog** mở trình quản lý Markdown của GitHub. Xem [BLOG.md](BLOG.md) để sử dụng và xuất bản bài viết.
+Blog trên GitHub Pages ở `/blog/` và `/en/blog/`, truy cập từ menu **Blog**. Danh sách bài có tìm kiếm, lọc chủ đề và sắp xếp. Nội dung được cập nhật bằng file Markdown trong repository; xem [BLOG.md](BLOG.md).
 
 Website cá nhân lấy cảm hứng bố cục từ [lexi-jones.github.io](https://lexi-jones.github.io): hồ sơ bên trái, nội dung bên phải, menu **About · Research · Gallery · Posts**. Nội dung và hình ảnh cá nhân của website tham khảo không được sao chép.
 

@@ -11,7 +11,7 @@ import {
 import { getSite, getUI } from '@/lib/i18n';
 import { localePath, type Locale } from '@/lib/locale';
 import { EntryCard } from '@/components/entry-card';
-import { BlogActions } from '@/components/blog-actions';
+import { BlogIndex } from '@/components/blog-index';
 
 export function AboutContent({ locale }: { locale: Locale }) {
   const ui = getUI(locale);
@@ -77,7 +77,7 @@ export function CollectionContent({
         <h1>{page.title}</h1>
         {page.description && <p>{page.description}</p>}
       </header>
-      {collection === 'posts' && <BlogActions locale={locale} />}
+      {collection === 'posts' ? <BlogIndex locale={locale} posts={entries.map(({ slug, title, summary, date, tags, minutes, sample }) => ({ slug, title, summary, date, tags, minutes, sample }))} /> : <>
       <div className="collection-bar">
         <span>{ui.collectionLabels[collection]}</span>
         <span>
@@ -96,6 +96,7 @@ export function CollectionContent({
           <p>{ui.emptyDescription}</p>
         </div>
       )}
+      </>}
     </>
   );
 }
@@ -162,7 +163,6 @@ export function DetailContent({
           )}
         </div>
       </header>
-      {entry.collection === 'posts' && <BlogActions locale={locale} slug={entry.slug} />}
       {showCover && (
         <figure className="detail-cover">
           <img

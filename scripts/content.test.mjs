@@ -12,20 +12,23 @@ import {
   formatDate,
 } from '../lib/content.ts';
 import { localePath, languageTarget } from '../lib/locale.ts';
-import { blogLinks } from '../lib/blog.ts';
+import { filterPosts } from '../lib/blog.ts';
 
-test('blog management targets the matching Markdown locale and safely encodes templates', () => {
-  const template = '---\ntitle: "Tiếng Việt & #notes"\npublished: false\n---\n';
-  for (const locale of ['vi', 'en']) {
-    const links = blogLinks(locale, template, 'first-note');
-    const create = new URL(links.create);
-    assert.equal(create.pathname, `/CISTILY/CISTILY.github.io/new/main/content/${locale}/posts`);
-    assert.equal(create.searchParams.get('value'), template);
-    assert.ok(links.edit.endsWith(`/edit/main/content/${locale}/posts/first-note.md`));
-    assert.ok(links.delete.endsWith(`/delete/main/content/${locale}/posts/first-note.md`));
-  }
-  assert.equal(blogLinks('vi', template).delete, undefined);
-  assert.throws(() => blogLinks('vi', template, '../secret'), /Invalid/);
+test('blog search combines accent-insensitive terms and topics; sorting keeps undated posts last', () => {
+  const posts = [
+    { slug: 'undated', title: 'Đọc sách', summary: 'Ghi chép', tags: ['Học tập'], date: '' },
+    { slug: 'older', title: 'Học bằng cách làm', summary: 'Bắt đầu dự án', tags: ['Học tập'], date: '2025-01-01' },
+    { slug: 'newer', title: 'Nghiên cứu', summary: 'Ghi chép kết quả', tags: ['Nghiên cứu'], date: '2026-01-01' },
+  ];
+  const slugs = (query = '', tag = '', sort = 'newest') => filterPosts(posts, query, tag, sort).map(p => p.slug);
+  assert.deepEqual(slugs('DOC SACH'), ['undated']);
+  assert.deepEqual(slugs('  hoc   du an ', 'Học tập'), ['older']);
+  assert.deepEqual(slugs('nghien cuu', 'Học tập'), []);
+  assert.deepEqual(slugs(), ['newer', 'older', 'undated']);
+  assert.deepEqual(slugs('', '', 'oldest'), ['older', 'newer', 'undated']);
+  assert.deepEqual(slugs('', '', 'title'), ['undated', 'older', 'newer']);
+  assert.equal(posts[0].slug, 'undated');
+  assert.deepEqual(filterPosts([], '', '', 'newest'), []);
 });
 
 test('blog language switching supports detail pages and missing translations', () => {

@@ -1,47 +1,37 @@
-# Quản lý blog bằng Markdown
+# Blog trên GitHub Pages
 
-Menu **Blog** trên website dẫn đến `/blog/` (tiếng Việt) hoặc `/en/blog/`
-(tiếng Anh). Mỗi bài có trang riêng `/blog/ten-bai/`. Các URL `/posts/` cũ
-vẫn hoạt động; cả hai cùng đọc một nguồn nội dung, không cần sao chép file.
+Blog nằm tại `/blog/` và `/en/blog/`, truy cập từ menu **Blog** của website cá nhân.
+Các URL `/posts/` trước đây vẫn hoạt động và dùng chung nguồn Markdown.
 
-## Thêm bài
+## Dành cho người đọc
 
-1. Mở Blog → **Quản lý blog** → **Thêm bài viết**.
-2. Đăng nhập GitHub bằng tài khoản có quyền ghi `CISTILY/CISTILY.github.io`.
-3. Đặt tên file, ví dụ `ghi-chep-nghien-cuu.md`. Mẫu Markdown đã được điền sẵn.
-4. Điền `title`, `summary`, nội dung và ngày `date: "YYYY-MM-DD"` (hoặc để trống).
-5. Đặt `published: true` để xuất bản; giữ `false` để lưu bản nháp.
-6. Chọn **Commit changes** vào `main`, hoặc tạo pull request rồi merge vào `main`.
-7. Chờ workflow **Deploy portfolio** hoàn thành. Nếu thất bại, xem lỗi ở GitHub Actions;
-   website vẫn giữ phiên bản triển khai thành công trước đó.
+- Danh sách một cột: tiêu đề liên kết trực tiếp đến bài, tóm tắt, ngày đăng, thời gian đọc và chủ đề.
+- Tìm theo tiêu đề, tóm tắt hoặc chủ đề; hỗ trợ tiếng Việt không dấu.
+- Lọc theo chủ đề bằng các nút phía trên hoặc nhãn chủ đề của mỗi bài.
+- Sắp xếp mới nhất, cũ nhất hoặc tiêu đề A–Z. Bài chưa có ngày nằm cuối khi sắp xếp theo ngày.
+- Hiển thị số kết quả và nút đặt lại bộ lọc khi cần.
+- Không có chức năng thêm/sửa/xóa trên giao diện blog.
 
-## Sửa và xóa
+## Cập nhật nội dung
 
-- Mở một bài → **Quản lý blog** → **Sửa bài viết**, sửa Markdown rồi commit.
-- Chọn **Xóa bài viết** để mở màn hình xóa trên GitHub. Chỉ khi xác nhận commit
-  việc xóa mới được lưu. Sau triển khai, URL bài đã xóa trả về trang 404;
-  hãy sửa các liên kết nội bộ trỏ tới bài đó để bước kiểm tra build không thất bại.
-- **Tất cả file & bản nháp** mở thư mục nguồn, bao gồm bài chưa xuất bản.
-- Có thể ẩn bài bằng `published: false` thay vì xóa file.
+Sửa file Markdown trong `content/vi/posts/` (tiếng Việt) hoặc `content/en/posts/`
+(tiếng Anh), sau đó commit/push lên `main`. Workflow GitHub Pages sẽ kiểm tra
+và triển khai. Không cần Vercel, Supabase hoặc cơ sở dữ liệu.
 
-Nguồn tiếng Việt: `content/vi/posts/*.md`; tiếng Anh: `content/en/posts/*.md`.
-Hai bản dịch dùng cùng tên file để nút đổi ngôn ngữ mở đúng bài. Mỗi bản được
-thêm/sửa/xóa độc lập. File `_template.md` không được hiển thị trong blog.
-Không đặt thông tin bí mật trong bản nháp: `published: false` chỉ ẩn trên website,
-file vẫn có thể được đọc trong repository công khai.
+Tạo bài bằng `npm run new:post -- ten-bai`, hoặc sao chép `_template.md`.
+Điền `title`, `summary`, `tags`, `date: "YYYY-MM-DD"` và đặt `published: true`.
+Ngày có thể để trống; giao diện sẽ hiển thị “Chưa ghi ngày”. `order` vẫn dùng
+cho các collection khác; danh sách blog sắp xếp theo lựa chọn của người đọc.
 
-Các nút quản lý mở GitHub trong tab mới; website không lưu token hay mật khẩu.
-GitHub kiểm soát quyền ghi và xác nhận commit/xóa. Đây là quản lý qua trình sửa
-Markdown của GitHub, không phải trình soạn thảo lưu trực tiếp trong website.
-
-## Làm việc trên máy
+Bản nháp (`published: false`) và `_template.md` không xuất hiện trên website.
+Mỗi bản dịch dùng cùng tên file để chuyển đổi ngôn ngữ đúng bài. Xóa file
+Markdown để gỡ bài, đồng thời cập nhật các liên kết nội bộ đang trỏ đến bài đó.
 
 ```sh
-npm run new:post -- ten-bai-viet
-# Sửa file Markdown được tạo, đặt published: true khi sẵn sàng.
+npx tsc --noEmit --incremental false
 npm run test:content
 npm run build
 ```
 
-Commit và push lên `main` để GitHub Pages cập nhật. Bản Sites, nếu dùng, cần
-triển khai riêng. Khi chuyển repository hoặc nhánh, cập nhật `lib/blog.ts`.
+Kết quả tĩnh nằm trong `dist/client`; tìm kiếm và bộ lọc chạy trong trình duyệt.
+Các liên kết và danh sách ban đầu có trong HTML xuất sẵn; tương tác lọc cần JavaScript.
