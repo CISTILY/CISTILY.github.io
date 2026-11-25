@@ -19,6 +19,7 @@ export function SiteNav({
     ['/projects/', ui.nav.projects],
     ['/gallery/', ui.nav.gallery],
     ['/blog/', ui.nav.posts],
+    ['/graduation/', ui.nav.graduation],
   ];
   return (
     <div className="site-controls">

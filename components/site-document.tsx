@@ -29,6 +29,7 @@ export function SiteDocument({
     ui = getUI(locale);
   const availablePaths = locales.flatMap((language) => [
     localePath(language),
+    localePath(language, '/graduation/'),
     ...routeCollections.flatMap((collection) => [
       localePath(language, `/${collection}/`),
       ...getEntriesForLocale(sourceCollection(collection) as Collection, language).map((entry) =>

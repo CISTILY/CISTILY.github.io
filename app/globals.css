@@ -324,6 +324,25 @@ h1 {
   margin-bottom: 15px;
   font-weight: 650;
 }
+.graduation-content { max-width: 780px; }
+.graduation-sections { display: flex; gap: 10px; margin: -7px 0 34px; }
+.graduation-sections a { border: 1px solid var(--border); border-radius: 999px; padding: 7px 16px; color: var(--foreground); font-size: 14px; }
+.graduation-sections a:hover { color: var(--accent); border-color: var(--accent); }
+.graduation-section { scroll-margin-top: 24px; margin: 0 0 54px; }
+.graduation-section > h2 { font-size: 26px; line-height: 1.4; margin: 0 0 20px; letter-spacing: -.4px; }
+.invitation-placeholder { min-height: 280px; display: grid; place-content: center; justify-items: center; gap: 12px; margin: 0 0 23px; padding: 28px; border: 1px dashed #a9bbc5; border-radius: 8px; color: #617984; background: linear-gradient(135deg, #f5f8f8, #edf3f4); text-align: center; }
+.placeholder-mark { font-size: 42px; line-height: 1; color: #7897a1; }
+.invitation-placeholder figcaption { font-size: 13px; }
+.invitation-message { max-width: 640px; font-size: 18px; line-height: 1.8; margin-bottom: 22px; }
+.invitation-details { display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; margin: 0; }
+.invitation-details > div, .address-card, .parking-card { border: 1px solid var(--border); border-radius: 7px; padding: 20px; background: #fff; }
+.invitation-details dt { color: var(--muted); font-size: 13px; margin-bottom: 7px; }
+.invitation-details dd { margin: 0; font-size: 15px; font-weight: 600; }
+.address-card { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 14px; }
+.address-pin { display: grid; place-items: center; flex: 0 0 40px; height: 40px; border-radius: 50%; color: var(--accent); background: #eaf2f4; font-size: 24px; }
+.address-card h3, .parking-card h3 { font-size: 17px; line-height: 1.5; margin-bottom: 6px; }
+.address-card p, .parking-card p { color: var(--muted); font-size: 15px; line-height: 1.75; }
+.parking-card > a { display: inline-block; margin-top: 13px; font-size: 13px; }
 .inline-link {
   display: inline-flex;
   align-items: center;
