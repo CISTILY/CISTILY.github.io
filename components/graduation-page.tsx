@@ -14,12 +14,14 @@ const copy = {
     venue: 'Địa điểm',
     school: 'Trường Đại học Khoa học tự nhiên, ĐHQG-HCM · Cơ sở 1',
     imagePlaceholder: 'Đặt ảnh thiệp mời tại /images/graduation-invitation.jpg',
-    addressTitle: 'Trường Đại học Khoa học tự nhiên, ĐHQG-HCM',
-    street: '227 đường Nguyễn Văn Cừ, Phường Chợ Quán, Thành phố Hồ Chí Minh',
-    parking: 'Địa điểm gửi xe',
-    parkingNote: 'Trong khuôn viên trường có bãi xe tầng hầm nhà I và bãi xe nhà B – C. Việc tiếp nhận khách và chỗ trống có thể thay đổi theo ngày; bạn vui lòng hỏi bảo vệ khi đến hoặc kiểm tra thông báo của trường trước buổi lễ.',
+    parking: 'Gửi xe: bãi tầng hầm nhà I hoặc khu nhà B – C; vui lòng hỏi bảo vệ về chỗ dành cho khách trong ngày.',
     map: 'Mở địa chỉ trên bản đồ',
-    parkingSource: 'Thông tin bãi xe theo thông báo dịch vụ giữ xe của HCMUS',
+    locations: [
+      { name: 'NOWZONE', address: '235 Nguyễn Văn Cừ, Thành phố Hồ Chí Minh', query: 'NOWZONE 235 Nguyen Van Cu Ho Chi Minh City' },
+      { name: 'Trường THPT chuyên Lê Hồng Phong', address: '235 Nguyễn Văn Cừ, Phường Chợ Quán, Thành phố Hồ Chí Minh', query: 'Trường THPT chuyên Lê Hồng Phong 235 Nguyễn Văn Cừ' },
+      { name: 'Trường Đại học Khoa học tự nhiên, ĐHQG-HCM', address: '227 Nguyễn Văn Cừ, Phường Chợ Quán, Thành phố Hồ Chí Minh', query: 'Trường Đại học Khoa học Tự nhiên 227 Nguyễn Văn Cừ' },
+      { name: 'Trường Đại học Sư phạm Thành phố Hồ Chí Minh', address: '280 An Dương Vương, Phường Chợ Quán, Thành phố Hồ Chí Minh', query: 'Trường Đại học Sư phạm Thành phố Hồ Chí Minh 280 An Dương Vương' },
+    ],
   },
   en: {
     kicker: 'A DAY TO REMEMBER',
@@ -34,20 +36,21 @@ const copy = {
     venue: 'Venue',
     school: 'University of Science, VNU-HCM · Campus 1',
     imagePlaceholder: 'Add the invitation image at /images/graduation-invitation.jpg',
-    addressTitle: 'University of Science, VNU-HCM',
-    street: '227 Nguyen Van Cu Street, Cho Quan Ward, Ho Chi Minh City, Vietnam',
-    parking: 'Parking',
-    parkingNote: 'The campus lists parking at the basement of Building I and near Buildings B–C. Guest access and availability may vary on the day; please check with campus security or the university before the ceremony.',
+    parking: 'Parking: basement of Building I or the Buildings B–C area. Please ask campus security about guest access and availability.',
     map: 'Open address in Maps',
-    parkingSource: 'Parking details from the university parking service notice',
+    locations: [
+      { name: 'NOWZONE', address: '235 Nguyen Van Cu Street, Ho Chi Minh City, Vietnam', query: 'NOWZONE 235 Nguyen Van Cu Ho Chi Minh City' },
+      { name: 'Le Hong Phong High School for the Gifted', address: '235 Nguyen Van Cu Street, Cho Quan Ward, Ho Chi Minh City, Vietnam', query: 'Le Hong Phong High School 235 Nguyen Van Cu' },
+      { name: 'University of Science, VNU-HCM', address: '227 Nguyen Van Cu Street, Cho Quan Ward, Ho Chi Minh City, Vietnam', query: 'University of Science 227 Nguyen Van Cu Ho Chi Minh City' },
+      { name: 'Ho Chi Minh City University of Education', address: '280 An Duong Vuong Street, Cho Quan Ward, Ho Chi Minh City, Vietnam', query: 'Ho Chi Minh City University of Education 280 An Duong Vuong' },
+    ],
   },
 } as const;
 
 export function GraduationPage({ locale }: { locale: Locale }) {
   const t = copy[locale];
-  const maps = 'https://maps.google.com/?q=227+Nguyen+Van+Cu+HCMUS';
   return (
-    <>
+    <div className="graduation-page">
       <header className="page-heading">
         <span className="page-kicker">{t.kicker}</span>
         <h1>{t.title}</h1>
@@ -74,21 +77,21 @@ export function GraduationPage({ locale }: { locale: Locale }) {
         <section className="graduation-section" id="address">
           <span className="page-kicker">02</span>
           <h2>{t.address}</h2>
-          <div className="address-card">
-            <div className="address-pin" aria-hidden="true">⌖</div>
-            <div>
-              <h3>{t.addressTitle}</h3>
-              <p>{t.street}</p>
-              <a className="inline-link" href={maps} target="_blank" rel="noreferrer">{t.map} <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-          <div className="parking-card">
-            <h3>{t.parking}</h3>
-            <p>{t.parkingNote}</p>
-            <a href="https://hcmus.edu.vn/moi-bao-gia-cung-cap-dich-vu-giu-xe-phuc-vu-vien-chuc-nguoi-lao-dong-thuoc-truong-dai-hoc-khoa-hoc-tu-nhien-dhqg-hcm/" target="_blank" rel="noreferrer">{t.parkingSource} ↗</a>
+          <div className="location-grid">
+            {t.locations.map((location, index) => (
+              <article className="address-card" key={location.name}>
+                <div className="address-pin" aria-hidden="true">0{index + 1}</div>
+                <div>
+                  <h3>{location.name}</h3>
+                  <p>{location.address}</p>
+                  {index === 2 && <p className="parking-note">{t.parking}</p>}
+                  <a className="inline-link" href={`https://maps.google.com/?q=${encodeURIComponent(location.query)}`} target="_blank" rel="noreferrer">{t.map} <span aria-hidden="true">↗</span></a>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }
