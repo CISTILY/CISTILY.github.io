@@ -13,7 +13,7 @@ const copy = {
     timePlaceholder: '[Giờ bắt đầu]',
     venue: 'Địa điểm',
     school: 'Trường Đại học Khoa học tự nhiên, ĐHQG-HCM · Cơ sở 1',
-    imagePlaceholder: 'Đặt ảnh thiệp mời tại /images/graduation-invitation.jpg',
+    invitationAlt: 'Thiệp mời dự lễ tốt nghiệp',
     parking: 'Gửi xe: bãi tầng hầm nhà I hoặc khu nhà B – C; vui lòng hỏi bảo vệ về chỗ dành cho khách trong ngày.',
     map: 'Mở địa chỉ trên bản đồ',
     locations: [
@@ -35,7 +35,7 @@ const copy = {
     timePlaceholder: '[Start time]',
     venue: 'Venue',
     school: 'University of Science, VNU-HCM · Campus 1',
-    imagePlaceholder: 'Add the invitation image at /images/graduation-invitation.jpg',
+    invitationAlt: 'Graduation ceremony invitation',
     parking: 'Parking: basement of Building I or the Buildings B–C area. Please ask campus security about guest access and availability.',
     map: 'Open address in Maps',
     locations: [
@@ -65,8 +65,7 @@ export function GraduationPage({ locale }: { locale: Locale }) {
           <span className="page-kicker">01</span>
           <h2>{t.invitation}</h2>
           <figure className="invitation-placeholder">
-            <div className="placeholder-mark" aria-hidden="true">✳</div>
-            <figcaption>{t.imagePlaceholder}</figcaption>
+            <img src="/images/graduation-invitation.jpg" alt={t.invitationAlt} />
           </figure>
           <p className="invitation-message">{t.invitationText}</p>
           <dl className="invitation-details">
