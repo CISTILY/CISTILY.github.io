@@ -16,9 +16,7 @@ export function SiteNav({
   const items = [
     ['/', ui.nav.about],
     ['/research/', ui.nav.research],
-    ['/projects/', ui.nav.projects],
     ['/gallery/', ui.nav.gallery],
-    ['/blog/', ui.nav.posts],
     ['/graduation/', ui.nav.graduation],
   ];
   return (
