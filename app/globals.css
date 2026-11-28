@@ -375,6 +375,9 @@ h1 {
   font-weight: 650;
   margin: 24px 0 10px;
 }
+.pdf-embed { margin: 28px 0; }
+.pdf-embed iframe { display: block; width: 100%; height: min(80vh, 900px); min-height: 520px; border: 1px solid var(--border); border-radius: 6px; background: #f5f7f9; }
+.pdf-embed figcaption { margin-top: 8px; font-size: 13px; text-align: right; }
 .prose ul,
 .prose ol {
   padding-left: 25px;

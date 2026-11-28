@@ -30,7 +30,15 @@ const markdown = new MarkdownIt({
   linkify: true,
   typographer: false,
 });
-export const renderMarkdown = (text: string) => markdown.render(text);
+export const renderMarkdown = (text: string) =>
+  markdown.render(text).replace(
+    /<p><a href="([^"]+\.pdf(?:\?[^\"]*)?)"[^>]*>(.*?)<\/a><\/p>/gi,
+    (paragraph, source: string, label: string) => {
+      const href = safeLink(source);
+      if (!href) return paragraph;
+      return `<figure class="pdf-embed"><iframe src="${href}" title="PDF preview" loading="lazy"></iframe><figcaption><a href="${href}" target="_blank" rel="noreferrer">${label} ↗</a></figcaption></figure>`;
+    },
+  );
 export const isCollection = (value: string): value is Collection =>
   collections.includes(value as Collection);
 
