@@ -2,17 +2,8 @@ import type { Locale } from '@/lib/locale';
 
 const copy = {
   vi: {
-    kicker: 'MỘT CỘT MỐC ĐÁNG NHỚ',
     title: 'Lễ tốt nghiệp của mình',
     intro: 'Mình rất vui nếu bạn có thể đến chung vui trong ngày đặc biệt này.',
-    invitation: 'Thiệp mời',
-    address: 'Địa chỉ',
-    invitationText: 'Trân trọng mời bạn đến tham dự lễ tốt nghiệp và cùng mình lưu lại khoảnh khắc đáng nhớ này.',
-    time: 'Thời gian',
-    datePlaceholder: '[Ngày, tháng, năm]',
-    timePlaceholder: '[Giờ bắt đầu]',
-    venue: 'Địa điểm',
-    school: 'Trường Đại học Khoa học tự nhiên, ĐHQG-HCM · Cơ sở 1',
     invitationAlt: 'Thiệp mời dự lễ tốt nghiệp',
     parking: 'Gửi xe: bãi tầng hầm nhà I hoặc khu nhà B – C; vui lòng hỏi bảo vệ về chỗ dành cho khách trong ngày.',
     map: 'Mở địa chỉ trên bản đồ',
@@ -24,17 +15,8 @@ const copy = {
     ],
   },
   en: {
-    kicker: 'A DAY TO REMEMBER',
     title: 'My graduation',
     intro: "I'd be delighted if you could join me for this special milestone.",
-    invitation: 'Invitation',
-    address: 'Address',
-    invitationText: 'You are warmly invited to my graduation ceremony. I hope we can celebrate this memorable moment together.',
-    time: 'Date and time',
-    datePlaceholder: '[Date, month, year]',
-    timePlaceholder: '[Start time]',
-    venue: 'Venue',
-    school: 'University of Science, VNU-HCM · Campus 1',
     invitationAlt: 'Graduation ceremony invitation',
     parking: 'Parking: basement of Building I or the Buildings B–C area. Please ask campus security about guest access and availability.',
     map: 'Open address in Maps',
@@ -52,30 +34,16 @@ export function GraduationPage({ locale }: { locale: Locale }) {
   return (
     <div className="graduation-page">
       <header className="page-heading">
-        <span className="page-kicker">{t.kicker}</span>
         <h1>{t.title}</h1>
         <p>{t.intro}</p>
       </header>
-      <nav className="graduation-sections" aria-label={locale === 'vi' ? 'Các phần' : 'Page sections'}>
-        <a href="#invitation">{t.invitation}</a>
-        <a href="#address">{t.address}</a>
-      </nav>
       <div className="graduation-content">
-        <section className="graduation-section" id="invitation">
-          <span className="page-kicker">01</span>
-          <h2>{t.invitation}</h2>
+        <section className="graduation-section">
           <figure className="invitation-placeholder">
             <img src="/images/graduation-invitation.jpg" alt={t.invitationAlt} />
           </figure>
-          <p className="invitation-message">{t.invitationText}</p>
-          <dl className="invitation-details">
-            <div><dt>{t.time}</dt><dd>{t.datePlaceholder}<br />{t.timePlaceholder}</dd></div>
-            <div><dt>{t.venue}</dt><dd>{t.school}</dd></div>
-          </dl>
         </section>
-        <section className="graduation-section" id="address">
-          <span className="page-kicker">02</span>
-          <h2>{t.address}</h2>
+        <section className="graduation-section">
           <div className="location-grid">
             {t.locations.map((location, index) => (
               <article className="address-card" key={location.name}>
