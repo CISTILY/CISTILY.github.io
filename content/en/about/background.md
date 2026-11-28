@@ -1,3 +1,5 @@
 I’m Nguyễn Văn Lê Bá Thành, currently pursuing a Master’s degree in Computer Science at the University of Science, VNU-HCM (HCMUS). I completed my undergraduate studies at HCMUS from 2022 to 2026. My interests lie in computer vision, multimodal learning, and medical AI, with a particular enthusiasm for experimentation and hands-on research projects. Outside of research, I enjoy playing video games and listening to orchestral music.
 
 This website brings together my research projects, notes on what I’m learning, and a record of the challenges I encounter along the way and how I approach solving them.
+
+![The best place to cry btw =))))](/images/background.jpg)
