@@ -1,5 +1,5 @@
 ---
-title: "PILL_B.LT26: Ảnh viên thuốc hai mặt chụp bằng điện thoại phục vụ phát hiện chi tiết và phân loại hình ảnh"
+title: "PILL_B.LT26: Bộ dữ liệu ảnh viên thuốc hai mặt phục vụ bài toán phát hiện chi tiết và phân loại"
 summary: "Bộ dữ liệu ảnh viên thuốc chụp hai mặt bằng điện thoại gồm 10.548 ảnh thuộc 293 nhóm thị giác, kèm nhãn phát hiện đối tượng, siêu dữ liệu, phân hoạch cố định và các mô hình phát hiện đối chứng."
 published: true
 sample: false
