@@ -182,6 +182,11 @@ p {
   align-items: center;
   padding: 14px 0;
 }
+.graduation-nav-icon {
+  width: 17px;
+  height: 17px;
+  margin-right: 6px;
+}
 .site-nav a:hover,
 .site-nav a[aria-current] {
   color: #27343e;

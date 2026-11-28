@@ -8,16 +8,13 @@ tags: ["Tốt nghiệp", "Dấu mốc"]
 cover: "/images/graduation/grad1.jpg"
 coverAlt: "Một khoảnh khắc trong ngày tốt nghiệp"
 images:
+  - src: "/images/graduation/grad5.jpg"
   - src: "/images/graduation/grad1.jpg"
-    alt: "Một khoảnh khắc trong ngày tốt nghiệp"
   - src: "/images/graduation/grad2.jpg"
-    alt: "Khoảnh khắc mừng tốt nghiệp"
   - src: "/images/graduation/grad3.jpg"
-    alt: "Kỷ niệm trong ngày tốt nghiệp"
   - src: "/images/graduation/grad4.jpg"
-    alt: "Một kỷ vật của ngày tốt nghiệp"
 ---
 
-## Một ngày đáng nhớ
+## Một cột mốc đáng nhớ
 
-Một vài bức ảnh lưu lại dấu mốc này, hành trình đã qua và niềm vui khi có mọi người cùng chia sẻ những khoảnh khắc ấy.
+Một vài bức ảnh lưu lại dấu mốc trưởng thành, hành trình đã qua và niềm vui khi được tận hưởng khoảnh khắc này cùng mọi người.

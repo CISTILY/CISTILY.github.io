@@ -1,5 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
+import { GraduationCap } from 'lucide-react';
 import { localePath, languageTarget, type Locale } from '@/lib/locale';
 import type { UI } from '@/lib/i18n';
 
@@ -36,6 +37,9 @@ export function SiteNav({
               href={href}
               aria-current={active ? 'page' : undefined}
             >
+              {path === '/graduation/' && (
+                <GraduationCap className="graduation-nav-icon" aria-hidden="true" />
+              )}
               {label}
             </a>
           );
