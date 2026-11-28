@@ -49,7 +49,7 @@ export function GraduationPage({ locale }: { locale: Locale }) {
               <article
                 className="address-card"
                 key={location.name}
-                style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)), url("${location.image}")` }}
+                style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.8)), url("${location.image}")` }}
               >
                 <div className="address-pin" aria-hidden="true">0{index + 1}</div>
                 <div>
