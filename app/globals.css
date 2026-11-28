@@ -335,8 +335,9 @@ h1 {
 .location-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .address-card { gap: 12px; min-width: 0; }
 .address-pin { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid rgba(40,103,128,.4); border-radius: 50%; color: #214b5d; background: rgba(255,255,255,.82); font-size: 12px; font-weight: 700; }
-.address-card h3, .parking-card h3 { color: #203e4b; font-size: 17px; line-height: 1.5; font-weight: 700; margin-bottom: 6px; }
-.address-card p, .parking-card p { color: #344d58; font-size: 15px; line-height: 1.75; }
+.address-card h3, .parking-card h3 { color: #163945; font-size: 17px; line-height: 1.5; font-weight: 700; margin-bottom: 6px; }
+.address-card p, .parking-card p { color: #263d46; font-size: 15px; line-height: 1.75; }
+.address-card .inline-link { color: #15566f; font-weight: 650; }
 .address-card > div:last-child { max-width: 100%; }
 .parking-card > a { display: inline-block; margin-top: 13px; font-size: 13px; }
 .parking-note { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 13px !important; }
