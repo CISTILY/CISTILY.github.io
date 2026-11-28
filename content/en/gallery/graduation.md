@@ -9,15 +9,15 @@ cover: "/images/graduation/grad1.jpg"
 coverAlt: "A moment from my graduation"
 images:
   - src: "/images/graduation/grad5.jpg"
-  - alt: "grad pic 1"
+    alt: "grad pic 1"
   - src: "/images/graduation/grad1.jpg"
-  - alt: "grad pic 2"
+    alt: "grad pic 2"
   - src: "/images/graduation/grad2.jpg"
-  - alt: "grad pic 3"
+    alt: "grad pic 3"
   - src: "/images/graduation/grad3.jpg"
-  - alt: "grad pic 4"
+    alt: "grad pic 4"
   - src: "/images/graduation/grad4.jpg"
-  - alt: "grad pic 5"
+    alt: "grad pic 5"
 ---
 
 ## A memorable milestone
